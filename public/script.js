@@ -1,3 +1,9 @@
+/* =========================================
+   QUAINT - MENU SCRIPT
+   GitHub Pages Version
+========================================= */
+
+
 const menu =
     document.getElementById("menu");
 
@@ -25,7 +31,7 @@ let searchQuery = "";
 
 
 /* =========================================
-   تحميل المنيو
+   تحميل المنيو من JSON
 ========================================= */
 
 async function loadMenu() {
@@ -33,13 +39,13 @@ async function loadMenu() {
     try {
 
         const response =
-            await fetch("/api/menu-db");
+            await fetch("./data/menu.json");
 
 
         if (!response.ok) {
 
             throw new Error(
-                "API Error"
+                "Cannot load menu.json"
             );
 
         }
@@ -49,16 +55,73 @@ async function loadMenu() {
             await response.json();
 
 
-        allProducts =
-            data.items || [];
+        /*
+           menu.json ممكن يكون:
 
+           Array
+
+           أو:
+
+           {
+               items: [...]
+           }
+        */
+
+        allProducts =
+            Array.isArray(data)
+                ? data
+                : (data.items || []);
+
+
+        /*
+           تجهيز البيانات
+        */
 
         allProducts =
             allProducts.map(product => {
 
+                let image =
+                    product.image || "";
+
+
+                /*
+                   تحويل مسار الصور
+                   من:
+
+                   /images/file.jpg
+
+                   إلى:
+
+                   ./images/file.jpg
+                */
+
+                if (
+                    image.startsWith("/images/")
+                ) {
+
+                    image =
+                        "." + image;
+
+                }
+
+
+                /*
+                   إذا الصورة فارغة
+                */
+
+                if (!image) {
+
+                    image =
+                        "./images/default.jpg";
+
+                }
+
+
                 return {
 
                     ...product,
+
+                    image: image,
 
                     notes:
                         parseJSON(
@@ -71,11 +134,13 @@ async function loadMenu() {
                         ),
 
                     available:
+                        product.available === true ||
                         Number(
                             product.available
                         ) === 1,
 
                     featured:
+                        product.featured === true ||
                         Number(
                             product.featured
                         ) === 1
@@ -85,9 +150,23 @@ async function loadMenu() {
             });
 
 
+        /*
+           إنشاء الأقسام
+        */
+
         createCategoryButtons();
 
+
+        /*
+           عرض المميز
+        */
+
         displayFeatured();
+
+
+        /*
+           عرض جميع المنتجات
+        */
 
         displayProducts("الكل");
 
@@ -104,11 +183,21 @@ async function loadMenu() {
 
         menu.innerHTML = `
 
-            <p class="error-message">
+            <div class="empty-state">
 
-                حدث خطأ في تحميل القائمة ❌
+                <div class="empty-icon">
+                    ❌
+                </div>
 
-            </p>
+                <h3>
+                    حدث خطأ في تحميل القائمة
+                </h3>
+
+                <p>
+                    تعذر تحميل بيانات المنيو.
+                </p>
+
+            </div>
 
         `;
 
@@ -139,8 +228,32 @@ function parseJSON(value) {
 
     try {
 
-        const result =
+        let result =
             JSON.parse(value);
+
+
+        /*
+           إذا كان JSON داخل JSON
+        */
+
+        if (
+            typeof result === "string"
+        ) {
+
+            try {
+
+                result =
+                    JSON.parse(result);
+
+            }
+
+            catch {
+
+                return [];
+
+            }
+
+        }
 
 
         return Array.isArray(result)
@@ -172,7 +285,9 @@ function displayFeatured() {
         );
 
 
-    /* إذا لا توجد أصناف مميزة */
+    /*
+       إذا لا توجد أصناف مميزة
+    */
 
     if (
         featuredProducts.length === 0
@@ -189,7 +304,9 @@ function displayFeatured() {
     }
 
 
-    /* إظهار القسم */
+    /*
+       إظهار القسم
+    */
 
     featuredSection.style.display =
         "block";
@@ -199,11 +316,14 @@ function displayFeatured() {
         "";
 
 
-    /* ترتيب المميز */
+    /*
+       ترتيب المميز
+    */
 
     featuredProducts.sort(
         (a, b) =>
-            b.id - a.id
+            Number(b.id || 0) -
+            Number(a.id || 0)
     );
 
 
@@ -333,8 +453,10 @@ function createCategoryButtons() {
 
 
                     menu.scrollIntoView({
+
                         behavior:
                             "smooth"
+
                     });
 
                 }
@@ -371,9 +493,9 @@ function displayProducts(
         [...allProducts];
 
 
-    /* =====================================
+    /*
        فلترة القسم
-    ===================================== */
+    */
 
     if (
         category !== "الكل"
@@ -389,9 +511,9 @@ function displayProducts(
     }
 
 
-    /* =====================================
+    /*
        فلترة البحث
-    ===================================== */
+    */
 
     if (
         searchQuery.trim() !== ""
@@ -451,9 +573,9 @@ function displayProducts(
     }
 
 
-    /* =====================================
+    /*
        المميز يظهر أولًا
-    ===================================== */
+    */
 
     products.sort(
         (a, b) => {
@@ -478,15 +600,18 @@ function displayProducts(
             }
 
 
-            return b.id - a.id;
+            return (
+                Number(b.id || 0) -
+                Number(a.id || 0)
+            );
 
         }
     );
 
 
-    /* =====================================
+    /*
        لا توجد نتائج
-    ===================================== */
+    */
 
     if (
         products.length === 0
@@ -517,9 +642,9 @@ function displayProducts(
     }
 
 
-    /* =====================================
-       إنشاء حاوية المنتجات
-    ===================================== */
+    /*
+       حاوية المنتجات
+    */
 
     const productsContainer =
         document.createElement(
@@ -532,9 +657,9 @@ function displayProducts(
     );
 
 
-    /* =====================================
+    /*
        إنشاء البطاقات
-    ===================================== */
+    */
 
     products.forEach(
         product => {
@@ -652,6 +777,10 @@ function createFlipCard(
     );
 
 
+    /*
+       غير متوفر
+    */
+
     if (!product.available) {
 
         wrapper.classList.add(
@@ -660,6 +789,10 @@ function createFlipCard(
 
     }
 
+
+    /*
+       مميز
+    */
 
     if (product.featured) {
 
@@ -816,6 +949,7 @@ function createFlipCard(
                 ${escapeHTML(
                     product.price
                 )}
+
                 ريال
 
             </strong>
@@ -881,6 +1015,7 @@ function createFlipCard(
                             </span>
 
                           `
+
                 }
 
             </div>
@@ -891,6 +1026,7 @@ function createFlipCard(
                 ${escapeHTML(
                     product.price
                 )}
+
                 ريال
 
             </strong>
@@ -914,37 +1050,19 @@ function createFlipCard(
             <div class="flip-card-front">
 
 
-                ${
-                    product.featured
-
-                        ? `
-
-                            <div class="featured-ribbon">
-
-                                ⭐ مميز
-
-                            </div>
-
-                          `
-
-                        : ""
-
-                }
-
-
                 <img
 
-                    src="${
-                        product.image ||
-                        "images/default.jpg"
-                    }"
+                    src="${escapeHTML(
+                        product.image
+                    )}"
 
                     alt="${escapeHTML(
                         product.name
                     )}"
 
                     onerror="
-                        this.src='images/default.jpg'
+                        this.onerror=null;
+                        this.src='./images/default.jpg';
                     "
 
                 >
@@ -983,6 +1101,7 @@ function createFlipCard(
                         ${escapeHTML(
                             product.price
                         )}
+
                         ريال
 
                     </strong>

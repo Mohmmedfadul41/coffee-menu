@@ -1815,3 +1815,63 @@ main {
         font-size: 18px;
     }
 }
+
+/* =========================================
+   QUAINT MENU TITLE
+========================================= */
+
+main > h2 {
+    text-align: center;
+
+    color: var(--brown);
+
+    font-family: "Playfair Display", "Cairo", serif;
+
+    font-size: clamp(30px, 5vw, 44px);
+
+    font-weight: 700;
+
+    margin: 0 0 45px;
+
+    position: relative;
+
+    letter-spacing: 1px;
+}
+
+/* الخط الذهبي تحت العنوان */
+
+main > h2::after {
+    content: "";
+
+    display: block;
+
+    width: 55px;
+    height: 3px;
+
+    margin: 14px auto 0;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--gold),
+            transparent
+        );
+}
+
+/* موبايل */
+
+@media (max-width: 700px) {
+
+    main > h2 {
+        font-size: 30px;
+
+        margin-bottom: 35px;
+    }
+
+    main > h2::after {
+        width: 45px;
+    }
+}
