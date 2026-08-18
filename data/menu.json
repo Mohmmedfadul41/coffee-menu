@@ -1,0 +1,105 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "كابتشينو",
+      "description": "إسبريسو مع الحليب ورغوة ناعمة",
+      "price": 15,
+      "category": "القهوة",
+      "image": "images/cappuccino.jpg",
+      "notes": [
+        "شوكولاتة",
+        "كراميل",
+        "مكسرات"
+      ],
+      "roast": "تحميص متوسط"
+    },
+    {
+      "id": 2,
+      "name": "لاتيه",
+      "description": "إسبريسو مع حليب كريمي",
+      "price": 16,
+      "category": "القهوة",
+      "image": "images/latte.jpg",
+      "notes": [
+        "حليب",
+        "كراميل",
+        "فانيلا"
+      ],
+      "roast": "تحميص متوسط"
+    },
+    {
+      "id": 3,
+      "name": "أمريكانو",
+      "description": "إسبريسو مع الماء الساخن",
+      "price": 12,
+      "category": "القهوة",
+      "image": "images/americano.jpg",
+      "notes": [
+        "شوكولاتة داكنة",
+        "مكسرات",
+        "حمضيات"
+      ],
+      "roast": "تحميص غامق"
+    },
+
+    {
+      "id": 4,
+      "name": "تشيز كيك",
+      "description": "تشيز كيك كريمي مع طبقة بسكويت",
+      "price": 22,
+      "category": "الحلا",
+      "image": "images/cheesecake.jpg",
+      "ingredients": [
+        "جبن كريمي",
+        "بسكويت",
+        "سكر",
+        "فانيلا"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "براوني",
+      "description": "براوني شوكولاتة غني وطري",
+      "price": 18,
+      "category": "الحلا",
+      "image": "images/brownie.jpg",
+      "ingredients": [
+        "شوكولاتة",
+        "دقيق",
+        "بيض",
+        "زبدة",
+        "سكر"
+      ]
+    },
+
+    {
+      "id": 6,
+      "name": "بان كيك",
+      "description": "بان كيك طازج مع العسل",
+      "price": 25,
+      "category": "الفطور",
+      "image": "images/pancake.jpg",
+      "ingredients": [
+        "دقيق",
+        "حليب",
+        "بيض",
+        "عسل"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "بيض وتوست",
+      "description": "بيض مع توست طازج",
+      "price": 20,
+      "category": "الفطور",
+      "image": "images/eggs-toast.jpg",
+      "ingredients": [
+        "بيض",
+        "توست",
+        "زبدة",
+        "أعشاب"
+      ]
+    }
+  ]
+}

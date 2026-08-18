@@ -1,0 +1,2369 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>QUAINT Dashboard</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f1eb;
+            color: #3b2418;
+            min-height: 100vh;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+        }
+
+        .dashboard {
+            max-width: 1200px;
+            margin: auto;
+            padding: 30px 20px 60px;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background:
+                linear-gradient(
+                    135deg,
+                    #3b2418,
+                    #5a3828
+                );
+
+            color: white;
+
+            padding: 35px;
+
+            border-radius: 24px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 10px 30px rgba(59, 36, 24, 0.15);
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #e8d5c4;
+        }
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 15px;
+
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+
+            padding: 22px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.06);
+
+            text-align: center;
+        }
+
+        .stat-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-title {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* =========================
+           ACTIONS
+        ========================= */
+
+        .actions {
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.06);
+
+            margin-bottom: 25px;
+        }
+
+        .actions-top {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+        }
+
+        .actions h2 {
+            font-size: 22px;
+        }
+
+        .btn {
+            border: none;
+
+            background: #4e342e;
+
+            color: white;
+
+            padding: 13px 24px;
+
+            border-radius: 25px;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #3b2418;
+
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           FILTERS
+        ========================= */
+
+        .filters {
+            display: grid;
+
+            grid-template-columns:
+                1fr 220px;
+
+            gap: 12px;
+        }
+
+        .filters input,
+        .filters select {
+            width: 100%;
+
+            padding: 13px 15px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 12px;
+
+            outline: none;
+
+            font-size: 15px;
+
+            background: white;
+        }
+
+        .filters input:focus,
+        .filters select:focus {
+            border-color: #8b6b5c;
+        }
+
+        /* =========================
+           ITEMS
+        ========================= */
+
+        .items-section {
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .items-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 20px;
+        }
+
+        .items-header h2 {
+            font-size: 22px;
+        }
+
+        .results-count {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* =========================
+           ITEM CARD
+        ========================= */
+
+        .item-row {
+            display: grid;
+
+            grid-template-columns:
+                70px
+                minmax(140px, 1fr)
+                100px
+                100px
+                110px
+                110px
+                minmax(260px, 1.5fr);
+
+            gap: 12px;
+
+            align-items: center;
+
+            padding: 16px 0;
+
+            border-bottom: 1px solid #eee;
+        }
+
+        .item-row:last-child {
+            border-bottom: none;
+        }
+
+        .item-image {
+            width: 60px;
+            height: 60px;
+
+            border-radius: 12px;
+
+            object-fit: cover;
+
+            background: #eee;
+        }
+
+        .item-name {
+            font-weight: bold;
+
+            font-size: 15px;
+        }
+
+        .item-description {
+            color: #888;
+
+            font-size: 12px;
+
+            margin-top: 5px;
+
+            line-height: 1.4;
+        }
+
+        .item-category {
+            color: #777;
+
+            font-size: 14px;
+        }
+
+        .item-price {
+            font-weight: bold;
+        }
+
+        .status {
+            display: inline-block;
+
+            padding: 6px 10px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+        .status.available {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status.unavailable {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .featured {
+            color: #a87800;
+
+            font-size: 13px;
+        }
+
+        /* =========================
+           ITEM ACTIONS
+        ========================= */
+
+        .item-actions {
+            display: flex;
+
+            gap: 7px;
+
+            flex-wrap: wrap;
+        }
+
+        .item-actions button {
+            border: none;
+
+            padding: 8px 11px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-size: 12px;
+
+            transition: 0.2s;
+        }
+
+        .item-actions button:hover {
+            transform: translateY(-2px);
+        }
+
+        .availability-btn {
+            background: #eee;
+
+            color: #3b2418;
+        }
+
+        .featured-btn {
+            background: #fff3cd;
+
+            color: #7a5a00;
+        }
+
+        .edit-btn {
+            background: #e8d5c4;
+
+            color: #3b2418;
+        }
+
+        .delete-btn {
+            background: #f5d6d6;
+
+            color: #8b2222;
+        }
+
+        /* =========================
+           EMPTY
+        ========================= */
+
+        .empty {
+            text-align: center;
+
+            padding: 50px 20px;
+
+            color: #888;
+        }
+
+        .empty-icon {
+            font-size: 45px;
+
+            margin-bottom: 12px;
+        }
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal {
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(0, 0, 0, 0.55);
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 20px;
+
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+
+            width: 100%;
+
+            max-width: 580px;
+
+            max-height: 92vh;
+
+            overflow-y: auto;
+
+            padding: 30px;
+
+            border-radius: 22px;
+
+            position: relative;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 25px;
+
+            color: #3b2418;
+        }
+
+        .close-btn {
+            position: absolute;
+
+            top: 15px;
+
+            left: 15px;
+
+            border: none;
+
+            background: #eee;
+
+            width: 36px;
+
+            height: 36px;
+
+            border-radius: 50%;
+
+            font-size: 22px;
+
+            cursor: pointer;
+        }
+
+        .modal-content label {
+            display: block;
+
+            margin: 13px 0 6px;
+
+            font-weight: bold;
+
+            font-size: 14px;
+        }
+
+        .modal-content input,
+        .modal-content select,
+        .modal-content textarea {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 10px;
+
+            font-size: 15px;
+
+            outline: none;
+        }
+
+        .modal-content textarea {
+            min-height: 80px;
+
+            resize: vertical;
+        }
+
+        .modal-content input:focus,
+        .modal-content select:focus,
+        .modal-content textarea:focus {
+            border-color: #8b6b5c;
+        }
+
+        .image-preview {
+            display: none;
+
+            width: 100%;
+
+            max-height: 220px;
+
+            object-fit: cover;
+
+            border-radius: 14px;
+
+            margin-top: 10px;
+        }
+
+        .current-image {
+            color: #777;
+
+            font-size: 12px;
+
+            margin-top: 7px;
+        }
+
+        .save-btn {
+            width: 100%;
+
+            margin-top: 22px;
+
+            border: none;
+
+            background: #4e342e;
+
+            color: white;
+
+            padding: 14px;
+
+            border-radius: 12px;
+
+            font-size: 17px;
+
+            cursor: pointer;
+        }
+
+        .save-btn:hover {
+            background: #3b2418;
+        }
+
+        .cancel-btn {
+            width: 100%;
+
+            margin-top: 10px;
+
+            border: none;
+
+            background: #eee;
+
+            color: #3b2418;
+
+            padding: 12px;
+
+            border-radius: 12px;
+
+            cursor: pointer;
+        }
+
+        /* =========================
+           TOAST
+        ========================= */
+
+        .toast {
+            position: fixed;
+
+            bottom: 25px;
+
+            right: 25px;
+
+            background: #3b2418;
+
+            color: white;
+
+            padding: 14px 20px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.2);
+
+            display: none;
+
+            z-index: 2000;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 1000px) {
+
+            .stats {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .item-row {
+                grid-template-columns:
+                    65px
+                    1fr
+                    90px
+                    100px
+                    1fr;
+
+                gap: 10px;
+            }
+
+            .item-actions {
+                grid-column: 1 / -1;
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .dashboard {
+                padding: 18px 12px 40px;
+            }
+
+            header {
+                padding: 25px 20px;
+            }
+
+            header h1 {
+                font-size: 25px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+
+                gap: 10px;
+            }
+
+            .stat-card {
+                padding: 17px 10px;
+            }
+
+            .stat-number {
+                font-size: 23px;
+            }
+
+            .actions,
+            .items-section {
+                padding: 18px;
+            }
+
+            .actions-top {
+                flex-direction: column;
+
+                align-items: stretch;
+            }
+
+            .filters {
+                grid-template-columns: 1fr;
+            }
+
+            .item-row {
+                grid-template-columns:
+                    60px
+                    1fr;
+
+                padding: 18px 0;
+            }
+
+            .item-category,
+            .item-price,
+            .item-status,
+            .item-featured {
+                grid-column: 1 / -1;
+            }
+
+            .item-actions {
+                grid-column: 1 / -1;
+
+                width: 100%;
+            }
+
+            .item-actions button {
+                flex: 1;
+            }
+
+            .modal-content {
+                padding: 25px 18px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="dashboard">
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header>
+
+        <h1>
+            QUAINT Dashboard ☕
+        </h1>
+
+        <p>
+            إدارة قائمة الكوفي والمنيو
+        </p>
+
+    </header>
+
+
+    <!-- =========================
+         STATS
+    ========================= -->
+
+    <section class="stats">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ☕
+            </div>
+
+            <div
+                class="stat-number"
+                id="totalCount"
+            >
+                0
+            </div>
+
+            <div class="stat-title">
+                إجمالي الأصناف
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🟢
+            </div>
+
+            <div
+                class="stat-number"
+                id="availableCount"
+            >
+                0
+            </div>
+
+            <div class="stat-title">
+                الأصناف المتوفرة
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🔴
+            </div>
+
+            <div
+                class="stat-number"
+                id="unavailableCount"
+            >
+                0
+            </div>
+
+            <div class="stat-title">
+                غير المتوفرة
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ⭐
+            </div>
+
+            <div
+                class="stat-number"
+                id="featuredCount"
+            >
+                0
+            </div>
+
+            <div class="stat-title">
+                الأصناف المميزة
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ACTIONS
+    ========================= -->
+
+    <section class="actions">
+
+        <div class="actions-top">
+
+            <h2>
+                إدارة المنيو
+            </h2>
+
+            <button
+                class="btn"
+                id="addButton"
+            >
+                + إضافة صنف
+            </button>
+
+        </div>
+
+
+        <div class="filters">
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="🔎 ابحث عن صنف..."
+            >
+
+
+            <select id="filterCategory">
+
+                <option value="الكل">
+                    جميع الأقسام
+                </option>
+
+                <option value="قهوة">
+                    ☕ القهوة
+                </option>
+
+                <option value="حلا">
+                    🍰 الحلا
+                </option>
+
+                <option value="فطور">
+                    🍳 الفطور
+                </option>
+
+            </select>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ITEMS
+    ========================= -->
+
+    <section class="items-section">
+
+        <div class="items-header">
+
+            <h2>
+                الأصناف الحالية
+            </h2>
+
+            <span
+                class="results-count"
+                id="resultsCount"
+            >
+                0 صنف
+            </span>
+
+        </div>
+
+
+        <div id="itemsList">
+
+            جاري تحميل الأصناف...
+
+        </div>
+
+    </section>
+
+
+</div>
+
+
+<!-- =========================
+     MODAL
+========================= -->
+
+<div
+    id="addModal"
+    class="modal"
+>
+
+    <div class="modal-content">
+
+        <button
+            id="closeModal"
+            class="close-btn"
+            type="button"
+        >
+            ×
+        </button>
+
+
+        <h2 id="modalTitle">
+            إضافة صنف جديد
+        </h2>
+
+
+        <form id="addItemForm">
+
+
+            <label>
+                اسم الصنف
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                required
+            >
+
+
+            <label>
+                القسم
+            </label>
+
+            <select
+                id="category"
+                required
+            >
+
+                <option value="">
+                    اختر القسم
+                </option>
+
+                <option value="قهوة">
+                    ☕ القهوة
+                </option>
+
+                <option value="حلا">
+                    🍰 الحلا
+                </option>
+
+                <option value="فطور">
+                    🍳 الفطور
+                </option>
+
+            </select>
+
+
+            <label>
+                الوصف
+            </label>
+
+            <textarea
+                id="description"
+                placeholder="مثال: إسبريسو غني مع الحليب..."
+            ></textarea>
+
+
+            <label>
+                السعر
+            </label>
+
+            <input
+                type="number"
+                id="price"
+                min="0"
+                step="0.5"
+                required
+            >
+
+
+            <label>
+                المكونات
+            </label>
+
+            <textarea
+                id="ingredients"
+                placeholder="إسبريسو, حليب, رغوة"
+            ></textarea>
+
+
+            <label>
+                الإيحاءات
+            </label>
+
+            <textarea
+                id="notes"
+                placeholder="شوكولاتة, بندق, كراميل"
+            ></textarea>
+
+
+            <label>
+                درجة التحميص
+            </label>
+
+            <input
+                type="text"
+                id="roast"
+                placeholder="خفيف / متوسط / غامق"
+            >
+
+
+            <label>
+                صورة الصنف
+            </label>
+
+            <input
+                type="file"
+                id="image"
+                accept="image/*"
+            >
+
+            <img
+                id="imagePreview"
+                class="image-preview"
+                alt="معاينة الصورة"
+            >
+
+            <div
+                id="currentImageText"
+                class="current-image"
+            ></div>
+
+
+            <button
+                type="submit"
+                class="save-btn"
+                id="saveButton"
+            >
+                حفظ الصنف
+            </button>
+
+
+            <button
+                type="button"
+                class="cancel-btn"
+                id="cancelButton"
+            >
+                إلغاء
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<div
+    id="toast"
+    class="toast"
+></div>
+
+
+<script>
+
+    /* =========================
+       VARIABLES
+    ========================= */
+
+    const addButton =
+        document.getElementById("addButton");
+
+    const modal =
+        document.getElementById("addModal");
+
+    const closeButton =
+        document.getElementById("closeModal");
+
+    const cancelButton =
+        document.getElementById("cancelButton");
+
+    const addItemForm =
+        document.getElementById("addItemForm");
+
+    const modalTitle =
+        document.getElementById("modalTitle");
+
+    const saveButton =
+        document.getElementById("saveButton");
+
+    const imageInput =
+        document.getElementById("image");
+
+    const imagePreview =
+        document.getElementById("imagePreview");
+
+    const currentImageText =
+        document.getElementById("currentImageText");
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+    const filterCategory =
+        document.getElementById("filterCategory");
+
+    let editingItemId = null;
+
+    let currentImage = "";
+
+    let allItems = [];
+
+
+    /* =========================
+       OPEN MODAL
+    ========================= */
+
+    addButton.addEventListener("click", () => {
+
+        editingItemId = null;
+
+        currentImage = "";
+
+        addItemForm.reset();
+
+        modalTitle.textContent =
+            "إضافة صنف جديد";
+
+        saveButton.textContent =
+            "حفظ الصنف";
+
+        imagePreview.style.display =
+            "none";
+
+        currentImageText.textContent =
+            "";
+
+        modal.style.display =
+            "flex";
+
+    });
+
+
+    /* =========================
+       CLOSE MODAL
+    ========================= */
+
+    function closeModal() {
+
+        modal.style.display =
+            "none";
+
+        editingItemId = null;
+
+        currentImage = "";
+
+        addItemForm.reset();
+
+        imagePreview.style.display =
+            "none";
+
+        currentImageText.textContent =
+            "";
+
+    }
+
+
+    closeButton.addEventListener(
+        "click",
+        closeModal
+    );
+
+
+    cancelButton.addEventListener(
+        "click",
+        closeModal
+    );
+
+
+    modal.addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target === modal
+            ) {
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+
+    /* =========================
+       IMAGE PREVIEW
+    ========================= */
+
+    imageInput.addEventListener(
+        "change",
+        () => {
+
+            const file =
+                imageInput.files[0];
+
+            if (!file) {
+
+                imagePreview.style.display =
+                    "none";
+
+                return;
+
+            }
+
+            const reader =
+                new FileReader();
+
+            reader.onload =
+                event => {
+
+                    imagePreview.src =
+                        event.target.result;
+
+                    imagePreview.style.display =
+                        "block";
+
+                };
+
+            reader.readAsDataURL(file);
+
+        }
+    );
+
+
+    /* =========================
+       ADD / EDIT ITEM
+    ========================= */
+
+    addItemForm.addEventListener(
+        "submit",
+        async event => {
+
+            event.preventDefault();
+
+            saveButton.disabled = true;
+
+            saveButton.textContent =
+                "جاري الحفظ...";
+
+
+            const formData =
+                new FormData();
+
+
+            formData.append(
+                "name",
+                document
+                    .getElementById("name")
+                    .value.trim()
+            );
+
+
+            formData.append(
+                "category",
+                document
+                    .getElementById("category")
+                    .value
+            );
+
+
+            formData.append(
+                "description",
+                document
+                    .getElementById("description")
+                    .value.trim()
+            );
+
+
+            formData.append(
+                "price",
+                document
+                    .getElementById("price")
+                    .value
+            );
+
+
+            /* =========================
+               INGREDIENTS
+            ========================= */
+
+            const ingredients =
+                document
+                    .getElementById("ingredients")
+                    .value
+                    .split(",")
+                    .map(item =>
+                        item.trim()
+                    )
+                    .filter(Boolean);
+
+
+            formData.append(
+                "ingredients",
+                JSON.stringify(ingredients)
+            );
+
+
+            /* =========================
+               NOTES
+            ========================= */
+
+            const notes =
+                document
+                    .getElementById("notes")
+                    .value
+                    .split(",")
+                    .map(item =>
+                        item.trim()
+                    )
+                    .filter(Boolean);
+
+
+            formData.append(
+                "notes",
+                JSON.stringify(notes)
+            );
+
+
+            formData.append(
+                "roast",
+                document
+                    .getElementById("roast")
+                    .value.trim()
+            );
+
+
+            /* =========================
+               KEEP OLD IMAGE
+            ========================= */
+
+            if (currentImage) {
+
+                formData.append(
+                    "image",
+                    currentImage
+                );
+
+            }
+
+
+            /* =========================
+               NEW IMAGE
+            ========================= */
+
+            const imageFile =
+                imageInput.files[0];
+
+
+            if (imageFile) {
+
+                formData.delete("image");
+
+                formData.append(
+                    "image",
+                    imageFile
+                );
+
+            }
+
+
+            try {
+
+                let response;
+
+
+                if (
+                    editingItemId !== null
+                ) {
+
+                    response =
+                        await fetch(
+                            `/api/menu-db/${editingItemId}`,
+                            {
+                                method: "PUT",
+                                body: formData
+                            }
+                        );
+
+                } else {
+
+                    response =
+                        await fetch(
+                            "/api/menu-db",
+                            {
+                                method: "POST",
+                                body: formData
+                            }
+                        );
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.error ||
+                        "حدث خطأ"
+                    );
+
+                }
+
+
+                showToast(
+                    editingItemId !== null
+                        ? "تم تعديل الصنف بنجاح ✅"
+                        : "تم إضافة الصنف بنجاح ✅"
+                );
+
+
+                closeModal();
+
+                await loadItems();
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+                alert(
+                    error.message ||
+                    "حدث خطأ أثناء حفظ الصنف ❌"
+                );
+
+            }
+
+            finally {
+
+                saveButton.disabled =
+                    false;
+
+                saveButton.textContent =
+                    "حفظ الصنف";
+
+            }
+
+        }
+    );
+
+
+    /* =========================
+       LOAD ITEMS
+    ========================= */
+
+    async function loadItems() {
+
+        const itemsList =
+            document.getElementById(
+                "itemsList"
+            );
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/menu-db"
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.error ||
+                    "حدث خطأ"
+                );
+
+            }
+
+
+            allItems =
+                data.items || [];
+
+
+            updateStats(
+                allItems
+            );
+
+
+            renderItems();
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            itemsList.innerHTML = `
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        ⚠️
+                    </div>
+
+                    <p>
+                        حدث خطأ أثناء تحميل الأصناف
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
+    }
+
+
+    /* =========================
+       UPDATE STATS
+    ========================= */
+
+    function updateStats(items) {
+
+        const total =
+            items.length;
+
+
+        const available =
+            items.filter(
+                item =>
+                    Number(item.available) === 1
+            ).length;
+
+
+        const unavailable =
+            total - available;
+
+
+        const featured =
+            items.filter(
+                item =>
+                    Number(item.featured) === 1
+            ).length;
+
+
+        document.getElementById(
+            "totalCount"
+        ).textContent = total;
+
+
+        document.getElementById(
+            "availableCount"
+        ).textContent = available;
+
+
+        document.getElementById(
+            "unavailableCount"
+        ).textContent = unavailable;
+
+
+        document.getElementById(
+            "featuredCount"
+        ).textContent = featured;
+
+    }
+
+
+    /* =========================
+       RENDER ITEMS
+    ========================= */
+
+    function renderItems() {
+
+        const itemsList =
+            document.getElementById(
+                "itemsList"
+            );
+
+
+        const search =
+            searchInput
+                .value
+                .trim()
+                .toLowerCase();
+
+
+        const category =
+            filterCategory.value;
+
+
+        const filtered =
+            allItems.filter(item => {
+
+                const matchesSearch =
+                    !search ||
+                    String(item.name)
+                        .toLowerCase()
+                        .includes(search);
+
+
+                const matchesCategory =
+                    category === "الكل" ||
+                    item.category === category;
+
+
+                return (
+                    matchesSearch &&
+                    matchesCategory
+                );
+
+            });
+
+
+        document.getElementById(
+            "resultsCount"
+        ).textContent =
+            `${filtered.length} صنف`;
+
+
+        if (
+            filtered.length === 0
+        ) {
+
+            itemsList.innerHTML = `
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        ☕
+                    </div>
+
+                    <p>
+                        لا توجد أصناف مطابقة.
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        itemsList.innerHTML = "";
+
+
+        filtered.forEach(item => {
+
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+
+            row.className =
+                "item-row";
+
+
+            const image =
+                item.image
+                    ? item.image
+                    : "/images/default.jpg";
+
+
+            row.innerHTML = `
+
+                <img
+                    class="item-image"
+                    src="${escapeHTML(image)}"
+                    alt="${escapeHTML(item.name)}"
+                    onerror="
+                        this.src='/images/default.jpg'
+                    "
+                >
+
+
+                <div>
+
+                    <div class="item-name">
+
+                        ${escapeHTML(item.name)}
+
+                    </div>
+
+                    <div class="item-description">
+
+                        ${
+                            escapeHTML(
+                                item.description || ""
+                            )
+                        }
+
+                    </div>
+
+                </div>
+
+
+                <div class="item-category">
+
+                    ${escapeHTML(item.category)}
+
+                </div>
+
+
+                <div class="item-price">
+
+                    ${item.price} ريال
+
+                </div>
+
+
+                <div>
+
+                    ${
+                        Number(item.available)
+                            ?
+
+                            `
+                            <span class="status available">
+                                🟢 متوفر
+                            </span>
+                            `
+
+                            :
+
+                            `
+                            <span class="status unavailable">
+                                🔴 غير متوفر
+                            </span>
+                            `
+                    }
+
+                </div>
+
+
+                <div>
+
+                    ${
+                        Number(item.featured)
+
+                            ?
+
+                            `
+                            <span class="featured">
+                                ⭐ مميز
+                            </span>
+                            `
+
+                            :
+
+                            `
+                            <span class="featured">
+                                ☆ عادي
+                            </span>
+                            `
+                    }
+
+                </div>
+
+
+                <div class="item-actions">
+
+
+                    <button
+                        class="availability-btn"
+                        onclick="
+                            toggleAvailability(
+                                ${item.id},
+                                ${Number(item.available)}
+                            )
+                        "
+                    >
+
+                        ${
+                            Number(item.available)
+                                ? "إيقاف"
+                                : "تفعيل"
+                        }
+
+                    </button>
+
+
+                    <button
+                        class="featured-btn"
+                        onclick="
+                            toggleFeatured(
+                                ${item.id},
+                                ${Number(item.featured)}
+                            )
+                        "
+                    >
+
+                        ${
+                            Number(item.featured)
+                                ? "إلغاء ⭐"
+                                : "تمييز ⭐"
+                        }
+
+                    </button>
+
+
+                    <button
+                        class="edit-btn"
+                        onclick="
+                            editItem(${item.id})
+                        "
+                    >
+
+                        تعديل
+
+                    </button>
+
+
+                    <button
+                        class="delete-btn"
+                        onclick="
+                            deleteItem(${item.id})
+                        "
+                    >
+
+                        حذف
+
+                    </button>
+
+
+                </div>
+
+            `;
+
+
+            itemsList.appendChild(row);
+
+        });
+
+    }
+
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    searchInput.addEventListener(
+        "input",
+        renderItems
+    );
+
+
+    filterCategory.addEventListener(
+        "change",
+        renderItems
+    );
+
+
+    /* =========================
+       EDIT ITEM
+    ========================= */
+
+    async function editItem(id) {
+
+        const item =
+            allItems.find(
+                item =>
+                    Number(item.id) === Number(id)
+            );
+
+
+        if (!item) {
+
+            alert(
+                "لم يتم العثور على الصنف"
+            );
+
+            return;
+
+        }
+
+
+        editingItemId =
+            id;
+
+
+        currentImage =
+            item.image || "";
+
+
+        modalTitle.textContent =
+            "تعديل الصنف";
+
+
+        saveButton.textContent =
+            "حفظ التعديل";
+
+
+        document.getElementById(
+            "name"
+        ).value =
+            item.name || "";
+
+
+        document.getElementById(
+            "category"
+        ).value =
+            item.category || "";
+
+
+        document.getElementById(
+            "description"
+        ).value =
+            item.description || "";
+
+
+        document.getElementById(
+            "price"
+        ).value =
+            item.price || "";
+
+
+        document.getElementById(
+            "ingredients"
+        ).value =
+            parseJSON(
+                item.ingredients
+            );
+
+
+        document.getElementById(
+            "notes"
+        ).value =
+            parseJSON(
+                item.notes
+            );
+
+
+        document.getElementById(
+            "roast"
+        ).value =
+            item.roast || "";
+
+
+        imageInput.value =
+            "";
+
+
+        if (item.image) {
+
+            imagePreview.src =
+                item.image;
+
+            imagePreview.style.display =
+                "block";
+
+            currentImageText.textContent =
+                "الصورة الحالية محفوظة — ارفع صورة جديدة لاستبدالها.";
+
+        } else {
+
+            imagePreview.style.display =
+                "none";
+
+            currentImageText.textContent =
+                "لا توجد صورة حالية.";
+
+        }
+
+
+        modal.style.display =
+            "flex";
+
+    }
+
+
+    /* =========================
+       PARSE JSON
+    ========================= */
+
+    function parseJSON(value) {
+
+        if (!value) {
+
+            return "";
+
+        }
+
+
+        try {
+
+            let parsed =
+                JSON.parse(value);
+
+
+            if (
+                typeof parsed === "string"
+            ) {
+
+                try {
+
+                    parsed =
+                        JSON.parse(parsed);
+
+                }
+
+                catch {
+
+                }
+
+            }
+
+
+            if (
+                Array.isArray(parsed)
+            ) {
+
+                return parsed.join(", ");
+
+            }
+
+
+            return String(parsed);
+
+        }
+
+        catch {
+
+            return String(value);
+
+        }
+
+    }
+
+
+    /* =========================
+       DELETE
+    ========================= */
+
+    async function deleteItem(id) {
+
+        const item =
+            allItems.find(
+                item =>
+                    Number(item.id) === Number(id)
+            );
+
+
+        const name =
+            item
+                ? item.name
+                : "هذا الصنف";
+
+
+        const confirmed =
+            confirm(
+                `هل أنت متأكد من حذف "${name}"؟`
+            );
+
+
+        if (!confirmed) {
+
+            return;
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `/api/menu-db/${id}`,
+                    {
+                        method: "DELETE"
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.error ||
+                    "حدث خطأ"
+                );
+
+            }
+
+
+            showToast(
+                "تم حذف الصنف بنجاح 🗑️"
+            );
+
+
+            await loadItems();
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            alert(
+                "حدث خطأ أثناء حذف الصنف ❌"
+            );
+
+        }
+
+    }
+
+
+    /* =========================
+       AVAILABILITY
+    ========================= */
+
+    async function toggleAvailability(
+        id,
+        currentStatus
+    ) {
+
+        try {
+
+            const response =
+                await fetch(
+                    `/api/menu-db/${id}/availability`,
+                    {
+                        method: "PUT",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify({
+                                available:
+                                    currentStatus
+                                        ? 0
+                                        : 1
+                            })
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.error ||
+                    "حدث خطأ"
+                );
+
+            }
+
+
+            showToast(
+                currentStatus
+                    ? "تم إيقاف الصنف 🔴"
+                    : "تم تفعيل الصنف 🟢"
+            );
+
+
+            await loadItems();
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            alert(
+                "حدث خطأ أثناء تغيير حالة الصنف ❌"
+            );
+
+        }
+
+    }
+
+
+    /* =========================
+       FEATURED
+    ========================= */
+
+    async function toggleFeatured(
+        id,
+        currentStatus
+    ) {
+
+        try {
+
+            const response =
+                await fetch(
+                    `/api/menu-db/${id}/featured`,
+                    {
+                        method: "PUT",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify({
+                                featured:
+                                    currentStatus
+                                        ? 0
+                                        : 1
+                            })
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.error ||
+                    "حدث خطأ"
+                );
+
+            }
+
+
+            showToast(
+                currentStatus
+                    ? "تم إلغاء التمييز"
+                    : "تم تمييز الصنف ⭐"
+            );
+
+
+            await loadItems();
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            alert(
+                "حدث خطأ أثناء تغيير التمييز ❌"
+            );
+
+        }
+
+    }
+
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    function showToast(message) {
+
+        const toast =
+            document.getElementById(
+                "toast"
+            );
+
+
+        toast.textContent =
+            message;
+
+
+        toast.style.display =
+            "block";
+
+
+        setTimeout(() => {
+
+            toast.style.display =
+                "none";
+
+        }, 2500);
+
+    }
+
+
+    /* =========================
+       SECURITY
+    ========================= */
+
+    function escapeHTML(value) {
+
+        if (
+            value === null ||
+            value === undefined
+        ) {
+
+            return "";
+
+        }
+
+
+        return String(value)
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+            .replace(
+                /</g,
+                "&lt;"
+            )
+            .replace(
+                />/g,
+                "&gt;"
+            )
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+
+    /* =========================
+       START
+    ========================= */
+
+    loadItems();
+
+</script>
+
+</body>
+
+</html>

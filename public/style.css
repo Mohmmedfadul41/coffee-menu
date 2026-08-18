@@ -1,0 +1,1817 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap');
+
+/* =========================================
+   QUAINT - PREMIUM MENU
+========================================= */
+
+:root {
+    --brown-dark: #2a1810;
+    --brown: #3b2418;
+    --brown-light: #5a3828;
+    --cream: #f7f2ec;
+    --cream-dark: #e9ddd2;
+    --gold: #c69c6d;
+    --gold-dark: #a87943;
+    --text: #2d1b12;
+    --muted: #7b6b62;
+    --white: #ffffff;
+    --green: #2e7d32;
+    --red: #c62828;
+
+    --shadow:
+        0 15px 45px rgba(45, 27, 18, 0.10);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Cairo", Arial, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero {
+    position: relative;
+
+    min-height: 570px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255,255,255,.08),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(198,156,109,.12),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            var(--brown-dark),
+            var(--brown),
+            var(--brown-light)
+        );
+
+    border-radius: 0 0 55px 55px;
+
+    box-shadow:
+        0 20px 55px rgba(42, 24, 16, .20);
+}
+
+.hero::before,
+.hero::after {
+    content: "";
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255,255,255,.08);
+}
+
+.hero::before {
+    width: 420px;
+    height: 420px;
+
+    top: -220px;
+    right: -130px;
+}
+
+.hero::after {
+    width: 300px;
+    height: 300px;
+
+    bottom: -180px;
+    left: -100px;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0,0,0,.05),
+            rgba(0,0,0,.15)
+        );
+}
+
+.hero-content {
+    position: relative;
+
+    z-index: 2;
+
+    padding: 30px 20px;
+}
+
+.hero-logo {
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(58px, 9vw, 105px);
+
+    font-weight: 700;
+
+    letter-spacing: 15px;
+
+    color: #fff;
+
+    text-shadow:
+        0 8px 25px rgba(0,0,0,.2);
+}
+
+.hero-line {
+    width: 75px;
+    height: 3px;
+
+    margin: 18px auto 22px;
+
+    border-radius: 10px;
+
+    background: var(--gold);
+}
+
+.hero-content h1 {
+    font-size: clamp(22px, 4vw, 34px);
+
+    font-weight: 600;
+
+    color: #f5e8dc;
+
+    margin-bottom: 8px;
+}
+
+.hero-content p {
+    font-size: 16px;
+
+    color: #d7c0ae;
+
+    margin-bottom: 30px;
+}
+
+.hero-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    text-decoration: none;
+
+    color: var(--brown-dark);
+
+    background: #fff;
+
+    padding: 13px 25px;
+
+    border-radius: 30px;
+
+    font-weight: 700;
+
+    font-size: 15px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.18);
+
+    transition: .3s ease;
+}
+
+.hero-button:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.25);
+}
+
+.hero-button span {
+    font-size: 20px;
+}
+
+
+/* =========================================
+   MAIN
+========================================= */
+
+main {
+    width: min(1150px, calc(100% - 40px));
+
+    margin: 70px auto;
+}
+
+
+/* =========================================
+   INTRO
+========================================= */
+
+.menu-intro {
+    text-align: center;
+
+    margin-bottom: 65px;
+}
+
+.section-label {
+    display: inline-block;
+
+    color: var(--gold);
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 8px;
+}
+
+.menu-intro h2,
+.section-heading h2,
+.menu-topbar h2 {
+    color: var(--brown);
+
+    font-size: clamp(27px, 4vw, 38px);
+
+    font-weight: 800;
+}
+
+.menu-intro p {
+    max-width: 600px;
+
+    margin: 12px auto 0;
+
+    color: var(--muted);
+
+    font-size: 15px;
+
+    line-height: 1.9;
+}
+
+
+/* =========================================
+   SECTION HEADING
+========================================= */
+
+.section-heading {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================================
+   FEATURED SECTION
+========================================= */
+
+.featured-section {
+    margin-bottom: 65px;
+}
+
+#featuredMenu .products {
+    margin-bottom: 0;
+}
+
+
+/* =========================================
+   SEARCH
+========================================= */
+
+.search-section {
+    margin-bottom: 55px;
+}
+
+.search-box {
+    position: relative;
+
+    max-width: 700px;
+
+    margin: auto;
+}
+
+.search-box input {
+    width: 100%;
+
+    border: 1px solid #e3d7cd;
+
+    outline: none;
+
+    background: #fff;
+
+    padding: 17px 55px 17px 50px;
+
+    border-radius: 18px;
+
+    font-size: 15px;
+
+    color: var(--text);
+
+    box-shadow:
+        0 8px 30px rgba(45,27,18,.06);
+
+    transition: .3s;
+}
+
+.search-box input:focus {
+    border-color: var(--gold);
+
+    box-shadow:
+        0 10px 35px rgba(198,156,109,.15);
+}
+
+.search-icon {
+    position: absolute;
+
+    right: 18px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    font-size: 20px;
+
+    z-index: 2;
+}
+
+#clearSearch {
+    position: absolute;
+
+    left: 13px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 32px;
+    height: 32px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #eee5dd;
+
+    color: var(--brown);
+
+    cursor: pointer;
+
+    font-size: 20px;
+
+    display: none;
+}
+
+
+/* =========================================
+   CATEGORIES
+========================================= */
+
+.categories-section {
+    margin-bottom: 60px;
+}
+
+.category-cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 22px;
+}
+
+.category-card {
+    position: relative;
+
+    min-height: 165px;
+
+    background: #fff;
+
+    border-radius: 25px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    border: 1px solid transparent;
+
+    box-shadow: var(--shadow);
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        background .35s ease,
+        border-color .35s ease;
+}
+
+.category-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 170px;
+    height: 170px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(198,156,109,.09);
+
+    top: -95px;
+    right: -70px;
+}
+
+.category-card:hover {
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 20px 45px rgba(45,27,18,.13);
+}
+
+.category-card.active {
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--brown),
+            var(--brown-light)
+        );
+
+    border-color: var(--brown);
+}
+
+.category-icon {
+    position: relative;
+
+    font-size: 44px;
+
+    line-height: 1;
+
+    margin-bottom: 12px;
+
+    transition:
+        transform .3s ease;
+}
+
+.category-card:hover .category-icon {
+    transform:
+        scale(1.12)
+        rotate(-3deg);
+}
+
+.category-card h3 {
+    position: relative;
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+    margin-bottom: 2px;
+}
+
+.category-card span {
+    position: relative;
+
+    color: #94847b;
+
+    font-size: 12px;
+
+    direction: ltr;
+}
+
+.category-card.active span {
+    color: #ead9ca;
+}
+
+
+/* =========================================
+   MENU TOP BAR
+========================================= */
+
+.menu-section {
+    scroll-margin-top: 25px;
+}
+
+.menu-topbar {
+    display: flex;
+
+    align-items: end;
+
+    justify-content: space-between;
+
+    margin-bottom: 25px;
+}
+
+.products-count {
+    color: var(--muted);
+
+    background: #fff;
+
+    padding: 7px 15px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,.05);
+}
+
+
+/* =========================================
+   PRODUCTS
+========================================= */
+
+.products {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 24px;
+}
+
+
+/* =========================================
+   FLIP CARD
+========================================= */
+
+.flip-card {
+    width: 100%;
+
+    /*
+       الحجم الجديد
+       أصغر من السابق
+    */
+    height: 390px;
+
+    perspective: 1300px;
+
+    cursor: pointer;
+}
+
+.flip-card-inner {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    transform-style: preserve-3d;
+
+    transition:
+        transform .8s
+        cubic-bezier(.4,.2,.2,1);
+}
+
+.flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    backface-visibility: hidden;
+
+    box-shadow:
+        0 12px 35px rgba(45,27,18,.10);
+}
+
+
+/* =========================================
+   FRONT
+========================================= */
+
+.flip-card-front {
+    background: #fff;
+
+    display: flex;
+
+    flex-direction: column;
+
+    transition:
+        .3s ease;
+}
+
+.flip-card:hover .flip-card-front {
+    box-shadow:
+        0 20px 50px rgba(45,27,18,.16);
+}
+
+
+/* =========================================
+   IMAGE
+========================================= */
+
+.flip-card-front img {
+    display: block;
+
+    width: 100%;
+
+    /*
+       تصغير الصورة
+    */
+    height: 205px;
+
+    object-fit: cover;
+
+    transition:
+        transform .5s ease,
+        filter .3s ease;
+}
+
+.flip-card:hover .flip-card-front img {
+    transform: scale(1.04);
+}
+
+
+/* =========================================
+   CARD CONTENT
+========================================= */
+
+.card-content {
+    flex: 1;
+
+    padding: 14px 18px 14px;
+
+    text-align: center;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.card-content h3 {
+    color: var(--brown);
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    margin-bottom: 5px;
+}
+
+.card-content p {
+    color: var(--muted);
+
+    font-size: 12px;
+
+    line-height: 1.55;
+
+    margin-bottom: 9px;
+
+    max-width: 95%;
+}
+
+.card-content strong {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--brown-light),
+            var(--brown)
+        );
+
+    padding: 7px 18px;
+
+    border-radius: 25px;
+
+    font-size: 14px;
+
+    box-shadow:
+        0 6px 18px rgba(59,36,24,.16);
+}
+
+.card-content small {
+    margin-top: auto;
+
+    padding-top: 7px;
+
+    color: #aaa;
+
+    font-size: 9px;
+}
+
+
+/* =========================================
+   AVAILABILITY
+========================================= */
+
+.availability {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 4px 11px;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    margin-bottom: 7px;
+}
+
+.availability.available {
+    background: #e8f5e9;
+
+    color: var(--green);
+}
+
+.availability.unavailable {
+    background: #ffebee;
+
+    color: var(--red);
+}
+
+
+/* =========================================
+   BACK
+========================================= */
+
+.flip-card-back {
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(255,255,255,.11),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at bottom left,
+            rgba(198,156,109,.12),
+            transparent 30%
+        ),
+        linear-gradient(
+            145deg,
+            var(--brown),
+            var(--brown-light)
+        );
+
+    color: white;
+
+    transform: rotateY(180deg);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+
+    padding: 25px 20px;
+}
+
+.flip-card-back h3 {
+    font-family: "Playfair Display", serif;
+
+    font-size: 26px;
+
+    margin-bottom: 3px;
+}
+
+.flip-card-back h3::after {
+    content: "";
+
+    display: block;
+
+    width: 42px;
+    height: 3px;
+
+    background: var(--gold);
+
+    border-radius: 20px;
+
+    margin: 10px auto 15px;
+}
+
+.flip-card-back h4 {
+    color: #ead9ca;
+
+    font-size: 14px;
+
+    margin-bottom: 11px;
+}
+
+
+/* =========================================
+   NOTES / INGREDIENTS
+========================================= */
+
+.flip-card-back .notes,
+.flip-card-back .ingredients {
+    width: 100%;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    margin-bottom: 13px;
+}
+
+.flip-card-back .notes span,
+.flip-card-back .ingredients span {
+    background:
+        rgba(255,255,255,.09);
+
+    border:
+        1px solid rgba(255,255,255,.13);
+
+    color: white;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    backdrop-filter: blur(5px);
+}
+
+
+/* =========================================
+   ROAST
+========================================= */
+
+.flip-card-back p {
+    margin: 2px 0 13px;
+
+    padding: 6px 15px;
+
+    border-radius: 25px;
+
+    background:
+        rgba(255,255,255,.09);
+
+    border:
+        1px solid rgba(255,255,255,.12);
+
+    color: #ead9ca;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   BACK PRICE
+========================================= */
+
+.flip-card-back > strong {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: white;
+
+    color: var(--brown);
+
+    padding: 8px 21px;
+
+    border-radius: 30px;
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 8px 22px rgba(0,0,0,.18);
+}
+
+.flip-card-back small {
+    margin-top: auto;
+
+    color: #d7c0ae;
+
+    font-size: 9px;
+
+    opacity: .75;
+}
+
+
+/* =========================================
+   FEATURED CARD
+========================================= */
+
+.featured-card {
+    position: relative;
+
+    /*
+       ظل خفيف فقط
+       بدون تكبير البطاقة
+    */
+    filter: drop-shadow(
+        0 10px 25px rgba(198,156,109,.12)
+    );
+}
+
+
+/* =========================================
+   FEATURED BADGE
+========================================= */
+
+.featured-badge {
+    position: absolute;
+
+    top: 12px;
+    right: 12px;
+
+    z-index: 20;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #dfbd8b,
+            #b9854c
+        );
+
+    color: white;
+
+    padding: 6px 11px;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: .3px;
+
+    box-shadow:
+        0 6px 16px rgba(70,42,20,.22);
+
+    border:
+        1px solid rgba(255,255,255,.25);
+
+    backdrop-filter: blur(5px);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+.featured-card:hover .featured-badge {
+    transform:
+        translateY(-2px)
+        scale(1.03);
+
+    box-shadow:
+        0 8px 20px rgba(70,42,20,.28);
+}
+
+
+/* =========================================
+   FEATURED CARD GOLD LINE
+========================================= */
+
+.featured-card .flip-card-front {
+    border:
+        1px solid rgba(198,156,109,.28);
+}
+
+.featured-card .flip-card-front::after {
+    content: "";
+
+    position: absolute;
+
+    left: 14px;
+    right: 14px;
+
+    bottom: 0;
+
+    height: 3px;
+
+    border-radius: 10px 10px 0 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--gold),
+            transparent
+        );
+
+    opacity: .75;
+}
+
+
+/* =========================================
+   UNAVAILABLE
+========================================= */
+
+.unavailable-card .flip-card-front img {
+    filter: grayscale(55%);
+
+    opacity: .60;
+}
+
+.unavailable-card .card-content {
+    opacity: .82;
+}
+
+.unavailable-card .card-content strong {
+    background: #777;
+}
+
+.unavailable-card {
+    opacity: .92;
+}
+
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.empty-state {
+    text-align: center;
+
+    padding: 65px 20px;
+
+    background: white;
+
+    border-radius: 25px;
+
+    box-shadow: var(--shadow);
+}
+
+.empty-icon {
+    font-size: 45px;
+
+    margin-bottom: 15px;
+}
+
+.empty-state h3 {
+    color: var(--brown);
+
+    font-size: 22px;
+
+    margin-bottom: 7px;
+}
+
+.empty-state p {
+    color: var(--muted);
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer {
+    text-align: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--brown-dark),
+            var(--brown)
+        );
+
+    color: white;
+
+    padding: 55px 20px 35px;
+
+    margin-top: 90px;
+
+    border-radius: 45px 45px 0 0;
+}
+
+.footer-logo {
+    font-family: "Playfair Display", serif;
+
+    font-size: 38px;
+
+    font-weight: 700;
+
+    letter-spacing: 8px;
+}
+
+.footer p {
+    color: #d7c0ae;
+
+    margin-top: 8px;
+
+    font-size: 14px;
+}
+
+.footer-line {
+    width: 50px;
+
+    height: 2px;
+
+    background: var(--gold);
+
+    margin: 20px auto;
+}
+
+.footer > span {
+    color: #a99587;
+
+    font-size: 11px;
+}
+
+
+/* =========================================
+   BACK TO TOP
+========================================= */
+
+.top-button {
+    position: fixed;
+
+    bottom: 22px;
+    left: 22px;
+
+    width: 46px;
+    height: 46px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: var(--brown);
+
+    color: white;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.18);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform: translateY(15px);
+
+    transition: .3s;
+
+    z-index: 100;
+}
+
+.top-button.show {
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(0);
+}
+
+.top-button:hover {
+    background: var(--brown-light);
+
+    transform: translateY(-3px);
+}
+
+
+/* =========================================
+   TABLETS
+========================================= */
+
+@media (max-width: 950px) {
+
+    main {
+        width:
+            min(
+                100% - 30px,
+                800px
+            );
+    }
+
+    .products {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .category-cards {
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 15px;
+    }
+
+    .category-card {
+        min-height: 150px;
+    }
+
+    .flip-card {
+        height: 385px;
+    }
+
+    .flip-card-front img {
+        height: 200px;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .hero {
+        min-height: 500px;
+
+        border-radius:
+            0 0 35px 35px;
+    }
+
+    .hero-logo {
+        letter-spacing: 9px;
+    }
+
+    main {
+        width: calc(100% - 24px);
+
+        margin: 50px auto;
+    }
+
+    .menu-intro {
+        margin-bottom: 45px;
+    }
+
+    .category-cards {
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+    }
+
+    .category-card {
+        min-height: 125px;
+    }
+
+    .category-icon {
+        font-size: 38px;
+
+        margin-bottom: 8px;
+    }
+
+    .products {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
+    .flip-card {
+        height: 390px;
+    }
+
+    .flip-card-front img {
+        height: 205px;
+    }
+
+    .menu-topbar {
+        align-items: center;
+    }
+
+    .menu-topbar h2 {
+        font-size: 25px;
+    }
+
+    .products-count {
+        font-size: 10px;
+
+        padding: 6px 10px;
+    }
+
+    .section-heading {
+        margin-bottom: 18px;
+    }
+
+    .featured-section,
+    .categories-section {
+        margin-bottom: 50px;
+    }
+
+    .featured-badge {
+        top: 10px;
+        right: 10px;
+
+        padding: 5px 9px;
+
+        font-size: 9px;
+    }
+
+    .footer {
+        margin-top: 60px;
+
+        border-radius:
+            30px 30px 0 0;
+    }
+}
+
+
+/* =========================================
+   SMALL PHONES
+========================================= */
+
+@media (max-width: 400px) {
+
+    .hero {
+        min-height: 450px;
+    }
+
+    .hero-logo {
+        font-size: 48px;
+
+        letter-spacing: 6px;
+    }
+
+    .hero-content h1 {
+        font-size: 20px;
+    }
+
+    .hero-content p {
+        font-size: 13px;
+    }
+
+    .hero-button {
+        padding: 11px 20px;
+
+        font-size: 13px;
+    }
+
+    .flip-card {
+        height: 375px;
+    }
+
+    .flip-card-front img {
+        height: 195px;
+    }
+
+    .card-content {
+        padding: 13px;
+    }
+
+    .card-content h3 {
+        font-size: 19px;
+    }
+
+    .flip-card-back {
+        padding: 23px 16px;
+    }
+
+    .flip-card-back h3 {
+        font-size: 24px;
+    }
+
+    .search-box input {
+        padding:
+            14px 48px 14px 45px;
+
+        font-size: 13px;
+    }
+
+    .top-button {
+        width: 42px;
+        height: 42px;
+
+        bottom: 15px;
+        left: 15px;
+    }
+}
+
+/* =========================================
+   QUAINT - FINAL FIX
+   إصلاح تعارض التصميم القديم والجديد
+========================================= */
+
+/* =========================
+   HERO FIX
+========================= */
+
+.hero {
+    position: relative;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255,255,255,.08),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(198,156,109,.12),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #2a1810,
+            #3b2418,
+            #5a3828
+        ) !important;
+
+    color: white;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 5;
+}
+
+.hero-content h1,
+.hero-content p,
+.hero-content span {
+    position: relative;
+    z-index: 5;
+}
+
+
+/* =========================
+   MAIN FIX
+========================= */
+
+main {
+    width: min(1150px, calc(100% - 40px)) !important;
+    margin: 70px auto !important;
+}
+
+
+/* =========================
+   CATEGORIES FIX
+   إلغاء تعارض #categories القديم
+========================= */
+
+#categories {
+    display: grid !important;
+
+    grid-template-columns:
+        repeat(3, 1fr) !important;
+
+    gap: 22px !important;
+
+    justify-content: initial !important;
+
+    margin-bottom: 65px !important;
+}
+
+#categories .category-card {
+    width: 100% !important;
+    min-height: 175px !important;
+}
+
+
+/* =========================
+   FEATURED SECTION
+========================= */
+
+#featuredMenu {
+    width: 100% !important;
+}
+
+#featuredMenu .products {
+    display: grid !important;
+
+    grid-template-columns:
+        repeat(3, 1fr) !important;
+
+    gap: 26px !important;
+
+    width: 100% !important;
+}
+
+
+/* =========================
+   NORMAL PRODUCTS
+========================= */
+
+#menu .products {
+    display: grid !important;
+
+    grid-template-columns:
+        repeat(3, 1fr) !important;
+
+    gap: 26px !important;
+
+    width: 100% !important;
+}
+
+
+/* =========================
+   CARD SIZE
+========================= */
+
+.flip-card {
+    width: 100% !important;
+
+    height: 410px !important;
+}
+
+.flip-card-front img {
+    width: 100% !important;
+
+    height: 215px !important;
+
+    object-fit: cover !important;
+}
+
+
+/* =========================
+   FEATURED BADGE
+========================= */
+
+.featured-card {
+    position: relative !important;
+}
+
+.featured-badge {
+    position: absolute !important;
+
+    top: 12px !important;
+    right: 12px !important;
+
+    z-index: 20 !important;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 950px) {
+
+    #featuredMenu .products,
+    #menu .products {
+        grid-template-columns:
+            repeat(2, 1fr) !important;
+    }
+
+    #categories {
+        grid-template-columns:
+            repeat(2, 1fr) !important;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    main {
+        width: calc(100% - 24px) !important;
+    }
+
+    #categories {
+        grid-template-columns: 1fr !important;
+
+        gap: 14px !important;
+    }
+
+    #categories .category-card {
+        min-height: 125px !important;
+    }
+
+    #featuredMenu .products,
+    #menu .products {
+        grid-template-columns: 1fr !important;
+
+        gap: 20px !important;
+    }
+
+    .flip-card {
+        height: 410px !important;
+    }
+
+    .flip-card-front img {
+        height: 220px !important;
+    }
+}
+
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media (max-width: 400px) {
+
+    .flip-card {
+        height: 395px !important;
+    }
+
+    .flip-card-front img {
+        height: 205px !important;
+    }
+}
+
+/* =========================================
+   ABOUT QUAINT
+========================================= */
+
+.about-quaint {
+    position: relative;
+
+    max-width: 850px;
+
+    margin: 80px auto 0;
+
+    padding: 65px 35px;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(198,156,109,.10),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #fff,
+            #f8f1eb
+        );
+
+    border-radius: 35px;
+
+    border: 1px solid rgba(198,156,109,.20);
+
+    box-shadow:
+        0 15px 45px rgba(45,27,18,.08);
+
+    overflow: hidden;
+}
+
+.about-quaint::before {
+    content: "QUAINT";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 130px;
+
+    font-weight: 700;
+
+    letter-spacing: 10px;
+
+    color: rgba(59,36,24,.025);
+
+    pointer-events: none;
+}
+
+.about-quaint-content {
+    position: relative;
+
+    z-index: 2;
+}
+
+.about-quaint h2 {
+    color: var(--brown);
+
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(30px, 5vw, 42px);
+
+    margin-top: 4px;
+}
+
+.about-line {
+    width: 50px;
+
+    height: 3px;
+
+    margin: 15px auto 22px;
+
+    border-radius: 10px;
+
+    background: var(--gold);
+}
+
+.about-quaint p {
+    max-width: 650px;
+
+    margin: 0 auto 10px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+
+    line-height: 2;
+
+}
+
+.about-signature {
+    display: block;
+
+    margin-top: 25px;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    letter-spacing: 5px;
+
+    color: var(--gold-dark);
+}
+
+
+/* =========================================
+   ABOUT - MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .about-quaint {
+        margin-top: 60px;
+
+        padding: 45px 22px;
+
+        border-radius: 28px;
+    }
+
+    .about-quaint::before {
+        font-size: 75px;
+
+        letter-spacing: 5px;
+    }
+
+    .about-quaint p {
+        font-size: 13px;
+
+        line-height: 1.9;
+    }
+
+    .about-signature {
+        font-size: 18px;
+    }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "coffee-menu",
+  "version": "1.0.0",
+  "description": "QUAINT Digital Menu",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "quaint",
+    "coffee",
+    "menu"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.2.1",
+    "multer": "^2.2.0",
+    "sqlite3": "^6.0.1"
+  }
+}
