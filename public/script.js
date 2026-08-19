@@ -1,5 +1,12 @@
-const menu =
+/* =========================================================
+   QUAINT - PREMIUM MENU JS
+========================================================= */
+
+const menuSection =
     document.getElementById("menu");
+
+const productsContainer =
+    document.getElementById("products");
 
 const categoriesContainer =
     document.getElementById("categories");
@@ -16,6 +23,12 @@ const searchInput =
 const clearSearch =
     document.getElementById("clearSearch");
 
+const productsCount =
+    document.getElementById("productsCount");
+
+const topButton =
+    document.getElementById("topBtn");
+
 
 let allProducts = [];
 
@@ -24,9 +37,9 @@ let currentCategory = "الكل";
 let searchQuery = "";
 
 
-/* =========================================
-   تحميل المنيو
-========================================= */
+/* =========================================================
+   تحميل القائمة
+========================================================= */
 
 async function loadMenu() {
 
@@ -37,11 +50,7 @@ async function loadMenu() {
 
 
         if (!response.ok) {
-
-            throw new Error(
-                "API Error"
-            );
-
+            throw new Error("API Error");
         }
 
 
@@ -53,6 +62,8 @@ async function loadMenu() {
             data.items || [];
 
 
+        /* تحويل البيانات */
+
         allProducts =
             allProducts.map(product => {
 
@@ -60,30 +71,32 @@ async function loadMenu() {
 
                     ...product,
 
+                    id:
+                        Number(product.id) || 0,
+
+                    price:
+                        product.price ?? "",
+
                     notes:
-                        parseJSON(
-                            product.notes
-                        ),
+                        parseJSON(product.notes),
 
                     ingredients:
-                        parseJSON(
-                            product.ingredients
-                        ),
+                        parseJSON(product.ingredients),
 
                     available:
-                        Number(
-                            product.available
-                        ) === 1,
+                        Number(product.available) === 1 ||
+                        product.available === true,
 
                     featured:
-                        Number(
-                            product.featured
-                        ) === 1
+                        Number(product.featured) === 1 ||
+                        product.featured === true
 
                 };
 
             });
 
+
+        /* تشغيل الواجهة */
 
         createCategoryButtons();
 
@@ -97,50 +110,68 @@ async function loadMenu() {
     catch (error) {
 
         console.error(
-            "Menu Error:",
+            "QUAINT Menu Error:",
             error
         );
 
 
-        menu.innerHTML = `
+        if (productsContainer) {
 
-            <p class="error-message">
+            productsContainer.innerHTML = `
 
-                حدث خطأ في تحميل القائمة ❌
+                <div class="empty-state">
 
-            </p>
+                    <div class="empty-icon">
+                        ⚠️
+                    </div>
 
-        `;
+                    <h3>
+                        تعذر تحميل القائمة
+                    </h3>
+
+                    <p>
+                        حدث خطأ أثناء الاتصال بالخادم.
+                        حاول تحديث الصفحة.
+                    </p>
+
+                </div>
+
+            `;
+
+        }
 
     }
 
 }
 
 
-/* =========================================
+/* =========================================================
    تحويل JSON
-========================================= */
+========================================================= */
 
 function parseJSON(value) {
 
     if (!value) {
-
         return [];
-
     }
 
 
     if (Array.isArray(value)) {
-
         return value;
-
     }
 
 
     try {
 
-        const result =
+        let result =
             JSON.parse(value);
+
+
+        /* إذا كان JSON داخل JSON */
+
+        if (typeof result === "string") {
+            result = JSON.parse(result);
+        }
 
 
         return Array.isArray(result)
@@ -148,7 +179,6 @@ function parseJSON(value) {
             : [];
 
     }
-
 
     catch {
 
@@ -159,85 +189,28 @@ function parseJSON(value) {
 }
 
 
-/* =========================================
-   FEATURED
-========================================= */
-
-function displayFeatured() {
-
-    const featuredProducts =
-        allProducts.filter(
-            product =>
-                product.featured
-        );
-
-
-    /* إذا لا توجد أصناف مميزة */
-
-    if (
-        featuredProducts.length === 0
-    ) {
-
-        featuredSection.style.display =
-            "none";
-
-        featuredMenu.innerHTML =
-            "";
-
-        return;
-
-    }
-
-
-    /* إظهار القسم */
-
-    featuredSection.style.display =
-        "block";
-
-
-    featuredMenu.innerHTML =
-        "";
-
-
-    /* ترتيب المميز */
-
-    featuredProducts.sort(
-        (a, b) =>
-            b.id - a.id
-    );
-
-
-    featuredProducts.forEach(
-        product => {
-
-            const card =
-                createFlipCard(
-                    product,
-                    true
-                );
-
-
-            featuredMenu.appendChild(
-                card
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================
+/* =========================================================
    الأقسام
-========================================= */
+========================================================= */
 
 function createCategoryButtons() {
 
-    categoriesContainer.innerHTML =
-        "";
+    if (!categoriesContainer) {
+        return;
+    }
+
+
+    categoriesContainer.innerHTML = "";
 
 
     const categories = [
+
+        {
+            name: "الكل",
+            title: "كل القائمة",
+            icon: "✨",
+            english: "All Menu"
+        },
 
         {
             name: "قهوة",
@@ -263,85 +236,178 @@ function createCategoryButtons() {
     ];
 
 
-    categories.forEach(
-        category => {
+    categories.forEach(category => {
 
-            const card =
-                document.createElement(
-                    "div"
+        const card =
+            document.createElement("div");
+
+
+        card.classList.add(
+            "category-card"
+        );
+
+
+        if (
+            category.name ===
+            currentCategory
+        ) {
+
+            card.classList.add(
+                "active"
+            );
+
+        }
+
+
+        card.innerHTML = `
+
+            <div class="category-icon">
+                ${category.icon}
+            </div>
+
+            <h3>
+                ${escapeHTML(
+                    category.title
+                )}
+            </h3>
+
+            <span>
+                ${escapeHTML(
+                    category.english
+                )}
+            </span>
+
+        `;
+
+
+        card.addEventListener(
+            "click",
+            () => {
+
+                document
+                    .querySelectorAll(
+                        ".category-card"
+                    )
+                    .forEach(item => {
+
+                        item.classList.remove(
+                            "active"
+                        );
+
+                    });
+
+
+                card.classList.add(
+                    "active"
                 );
 
 
-            card.classList.add(
-                "category-card"
-            );
+                currentCategory =
+                    category.name;
 
 
-            card.innerHTML = `
-
-                <div class="category-icon">
-                    ${category.icon}
-                </div>
-
-                <h3>
-                    ${escapeHTML(
-                        category.title
-                    )}
-                </h3>
-
-                <span>
-                    ${escapeHTML(
-                        category.english
-                    )}
-                </span>
-
-            `;
+                displayProducts(
+                    currentCategory
+                );
 
 
-            card.addEventListener(
-                "click",
-                () => {
+                if (menuSection) {
 
-                    document
-                        .querySelectorAll(
-                            ".category-card"
-                        )
-                        .forEach(
-                            item => {
+                    menuSection.scrollIntoView({
 
-                                item.classList
-                                    .remove(
-                                        "active"
-                                    );
+                        behavior: "smooth",
 
-                            }
-                        );
+                        block: "start"
 
-
-                    card.classList.add(
-                        "active"
-                    );
-
-
-                    currentCategory =
-                        category.name;
-
-
-                    displayProducts(
-                        currentCategory
-                    );
-
-
-                    menu.scrollIntoView({
-                        behavior:
-                            "smooth"
                     });
 
                 }
+
+            }
+        );
+
+
+        categoriesContainer.appendChild(
+            card
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   الأكثر طلباً لدينا
+========================================================= */
+
+function displayFeatured() {
+
+    if (
+        !featuredSection ||
+        !featuredMenu
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+       الأصناف التي تم تحديدها كمميز
+       من لوحة الإدارة تظهر هنا
+       على أنها "الأكثر طلباً لدينا"
+    */
+
+    const popularProducts =
+        allProducts
+            .filter(
+                product =>
+                    product.featured
+            )
+            .sort(
+                (a, b) =>
+                    b.id - a.id
             );
 
 
-            categoriesContainer.appendChild(
+    /* لا يوجد أصناف */
+
+    if (
+        popularProducts.length === 0
+    ) {
+
+        featuredSection.style.display =
+            "none";
+
+        featuredMenu.innerHTML =
+            "";
+
+        return;
+
+    }
+
+
+    /* يوجد أصناف */
+
+    featuredSection.style.display =
+        "block";
+
+
+    featuredMenu.innerHTML =
+        "";
+
+
+    popularProducts.forEach(
+        product => {
+
+            const card =
+                createFlipCard(
+                    product,
+                    true
+                );
+
+
+            featuredMenu.appendChild(
                 card
             );
 
@@ -351,19 +417,30 @@ function createCategoryButtons() {
 }
 
 
-/* =========================================
-   عرض المنتجات + البحث
-========================================= */
+/* =========================================================
+   عرض المنتجات
+========================================================= */
 
 function displayProducts(
     category = currentCategory
 ) {
 
+    if (!productsContainer) {
+        return;
+    }
+
+
     currentCategory =
         category;
 
 
-    menu.innerHTML =
+    /*
+       مهم جداً:
+       لا نمسح #menu بالكامل.
+       نمسح فقط المنتجات.
+    */
+
+    productsContainer.innerHTML =
         "";
 
 
@@ -371,9 +448,9 @@ function displayProducts(
         [...allProducts];
 
 
-    /* =====================================
+    /* -----------------------------------------------------
        فلترة القسم
-    ===================================== */
+    ----------------------------------------------------- */
 
     if (
         category !== "الكل"
@@ -389,9 +466,9 @@ function displayProducts(
     }
 
 
-    /* =====================================
-       فلترة البحث
-    ===================================== */
+    /* -----------------------------------------------------
+       البحث
+    ----------------------------------------------------- */
 
     if (
         searchQuery.trim() !== ""
@@ -427,21 +504,11 @@ function displayProducts(
 
                     return (
 
-                        name.includes(
-                            query
-                        )
+                        name.includes(query) ||
 
-                        ||
+                        description.includes(query) ||
 
-                        description.includes(
-                            query
-                        )
-
-                        ||
-
-                        categoryName.includes(
-                            query
-                        )
+                        categoryName.includes(query)
 
                     );
 
@@ -451,48 +518,55 @@ function displayProducts(
     }
 
 
-    /* =====================================
-       المميز يظهر أولًا
-    ===================================== */
+    /* -----------------------------------------------------
+       الأكثر طلباً أولاً
+    ----------------------------------------------------- */
 
-    products.sort(
-        (a, b) => {
+    products.sort((a, b) => {
 
-            if (
-                a.featured &&
-                !b.featured
-            ) {
+        if (
+            a.featured &&
+            !b.featured
+        ) {
 
-                return -1;
-
-            }
-
-
-            if (
-                !a.featured &&
-                b.featured
-            ) {
-
-                return 1;
-
-            }
-
-
-            return b.id - a.id;
+            return -1;
 
         }
+
+
+        if (
+            !a.featured &&
+            b.featured
+        ) {
+
+            return 1;
+
+        }
+
+
+        return b.id - a.id;
+
+    });
+
+
+    /* -----------------------------------------------------
+       تحديث العدد
+    ----------------------------------------------------- */
+
+    updateProductsCount(
+        products.length
     );
 
 
-    /* =====================================
+    /* -----------------------------------------------------
        لا توجد نتائج
-    ===================================== */
+    ----------------------------------------------------- */
 
     if (
         products.length === 0
     ) {
 
-        menu.innerHTML = `
+        productsContainer.innerHTML = `
 
             <div class="empty-state">
 
@@ -517,60 +591,53 @@ function displayProducts(
     }
 
 
-    /* =====================================
-       إنشاء حاوية المنتجات
-    ===================================== */
-
-    const productsContainer =
-        document.createElement(
-            "div"
-        );
-
-
-    productsContainer.classList.add(
-        "products"
-    );
-
-
-    /* =====================================
+    /* -----------------------------------------------------
        إنشاء البطاقات
-    ===================================== */
+    ----------------------------------------------------- */
 
-    products.forEach(
-        product => {
+    products.forEach(product => {
 
-            const card =
-                createFlipCard(
-                    product,
-                    false
-                );
-
-
-            productsContainer.appendChild(
-                card
+        const card =
+            createFlipCard(
+                product,
+                false
             );
 
-        }
-    );
 
+        productsContainer.appendChild(
+            card
+        );
 
-    menu.appendChild(
-        productsContainer
-    );
+    });
 
 }
 
 
-/* =========================================
+/* =========================================================
+   عدد المنتجات
+========================================================= */
+
+function updateProductsCount(count) {
+
+    if (!productsCount) {
+        return;
+    }
+
+
+    productsCount.textContent =
+        `${count} صنف`;
+
+}
+
+
+/* =========================================================
    البحث
-========================================= */
+========================================================= */
 
 function setupSearch() {
 
     if (!searchInput) {
-
         return;
-
     }
 
 
@@ -632,25 +699,27 @@ function setupSearch() {
 }
 
 
-/* =========================================
-   بطاقة المنتج
-========================================= */
+/* =========================================================
+   إنشاء بطاقة المنتج
+========================================================= */
 
 function createFlipCard(
     product,
-    isFeaturedSection = false
+    isPopularSection = false
 ) {
 
     const wrapper =
-        document.createElement(
-            "div"
-        );
+        document.createElement("div");
 
 
     wrapper.classList.add(
         "flip-card"
     );
 
+
+    /* -----------------------------------------------------
+       غير متوفر
+    ----------------------------------------------------- */
 
     if (!product.available) {
 
@@ -661,6 +730,10 @@ function createFlipCard(
     }
 
 
+    /* -----------------------------------------------------
+       مميز / الأكثر طلباً
+    ----------------------------------------------------- */
+
     if (product.featured) {
 
         wrapper.classList.add(
@@ -670,12 +743,9 @@ function createFlipCard(
     }
 
 
-    let backContent = "";
-
-
-    /* =====================================
-       الحالة
-    ===================================== */
+    /* -----------------------------------------------------
+       حالة المنتج
+    ----------------------------------------------------- */
 
     const availabilityBadge =
         product.available
@@ -683,9 +753,7 @@ function createFlipCard(
             ? `
 
                 <span class="availability available">
-
                     🟢 متوفر
-
                 </span>
 
               `
@@ -693,17 +761,15 @@ function createFlipCard(
             : `
 
                 <span class="availability unavailable">
-
                     🔴 غير متوفر
-
                 </span>
 
               `;
 
 
-    /* =====================================
-       مميز
-    ===================================== */
+    /* -----------------------------------------------------
+       شارة الأكثر طلباً
+    ----------------------------------------------------- */
 
     const featuredBadge =
         product.featured
@@ -711,9 +777,7 @@ function createFlipCard(
             ? `
 
                 <span class="featured-badge">
-
-                    ⭐ مميز
-
+                    ⭐ الأكثر طلباً
                 </span>
 
               `
@@ -721,9 +785,16 @@ function createFlipCard(
             : "";
 
 
-    /* =====================================
+    /* -----------------------------------------------------
+       محتوى الخلفية
+    ----------------------------------------------------- */
+
+    let backContent = "";
+
+
+    /* =========================
        القهوة
-    ===================================== */
+    ========================= */
 
     if (
         product.category ===
@@ -733,18 +804,14 @@ function createFlipCard(
         backContent = `
 
             <h3>
-
                 ${escapeHTML(
                     product.name
                 )}
-
             </h3>
 
 
             <h4>
-
                 إيحاءات القهوة
-
             </h4>
 
 
@@ -754,29 +821,22 @@ function createFlipCard(
                     product.notes.length > 0
 
                         ? product.notes
-                            .map(
-                                note => `
+                            .map(note => `
 
-                                    <span>
+                                <span>
+                                    ☕
+                                    ${escapeHTML(
+                                        note
+                                    )}
+                                </span>
 
-                                        ☕
-
-                                        ${escapeHTML(
-                                            note
-                                        )}
-
-                                    </span>
-
-                                `
-                            )
+                            `)
                             .join("")
 
                         : `
 
                             <span>
-
                                 لا توجد إيحاءات
-
                             </span>
 
                           `
@@ -791,17 +851,13 @@ function createFlipCard(
                     ? `
 
                         <p>
-
                             درجة التحميص:
 
                             <strong>
-
                                 ${escapeHTML(
                                     product.roast
                                 )}
-
                             </strong>
-
                         </p>
 
                       `
@@ -812,12 +868,10 @@ function createFlipCard(
 
 
             <strong>
-
                 ${escapeHTML(
                     product.price
                 )}
                 ريال
-
             </strong>
 
         `;
@@ -825,27 +879,23 @@ function createFlipCard(
     }
 
 
-    /* =====================================
+    /* =========================
        الحلا والفطور
-    ===================================== */
+    ========================= */
 
     else {
 
         backContent = `
 
             <h3>
-
                 ${escapeHTML(
                     product.name
                 )}
-
             </h3>
 
 
             <h4>
-
                 المكونات
-
             </h4>
 
 
@@ -855,29 +905,22 @@ function createFlipCard(
                     product.ingredients.length > 0
 
                         ? product.ingredients
-                            .map(
-                                item => `
+                            .map(item => `
 
-                                    <span>
+                                <span>
+                                    •
+                                    ${escapeHTML(
+                                        item
+                                    )}
+                                </span>
 
-                                        •
-
-                                        ${escapeHTML(
-                                            item
-                                        )}
-
-                                    </span>
-
-                                `
-                            )
+                            `)
                             .join("")
 
                         : `
 
                             <span>
-
                                 لا توجد مكونات
-
                             </span>
 
                           `
@@ -887,12 +930,10 @@ function createFlipCard(
 
 
             <strong>
-
                 ${escapeHTML(
                     product.price
                 )}
                 ريال
-
             </strong>
 
         `;
@@ -900,9 +941,9 @@ function createFlipCard(
     }
 
 
-    /* =====================================
-       البطاقة
-    ===================================== */
+    /* =====================================================
+       HTML البطاقة
+    ===================================================== */
 
     wrapper.innerHTML = `
 
@@ -914,26 +955,7 @@ function createFlipCard(
             <div class="flip-card-front">
 
 
-                ${
-                    product.featured
-
-                        ? `
-
-                            <div class="featured-ribbon">
-
-                                ⭐ مميز
-
-                            </div>
-
-                          `
-
-                        : ""
-
-                }
-
-
                 <img
-
                     src="${
                         product.image ||
                         "images/default.jpg"
@@ -944,9 +966,9 @@ function createFlipCard(
                     )}"
 
                     onerror="
-                        this.src='images/default.jpg'
+                        this.onerror=null;
+                        this.src='images/default.jpg';
                     "
-
                 >
 
 
@@ -960,38 +982,30 @@ function createFlipCard(
 
 
                     <h3>
-
                         ${escapeHTML(
                             product.name
                         )}
-
                     </h3>
 
 
                     <p>
-
                         ${escapeHTML(
                             product.description ||
-                            ""
+                            "صنف من قائمة QUAINT"
                         )}
-
                     </p>
 
 
                     <strong>
-
                         ${escapeHTML(
                             product.price
                         )}
                         ريال
-
                     </strong>
 
 
                     <small>
-
                         اضغط لمعرفة التفاصيل
-
                     </small>
 
 
@@ -1010,10 +1024,8 @@ function createFlipCard(
 
                         ? `
 
-                            <div class="back-featured">
-
-                                ⭐ اختيار QUAINT
-
+                            <div class="featured-badge">
+                                ⭐ الأكثر طلباً
                             </div>
 
                           `
@@ -1027,9 +1039,7 @@ function createFlipCard(
 
 
                 <small>
-
                     اضغط للعودة
-
                 </small>
 
 
@@ -1041,9 +1051,9 @@ function createFlipCard(
     `;
 
 
-    /* =====================================
-       Flip
-    ===================================== */
+    /* =====================================================
+       قلب البطاقة
+    ===================================================== */
 
     wrapper.addEventListener(
         "click",
@@ -1062,9 +1072,9 @@ function createFlipCard(
 }
 
 
-/* =========================================
+/* =========================================================
    حماية HTML
-========================================= */
+========================================================= */
 
 function escapeHTML(value) {
 
@@ -1108,10 +1118,74 @@ function escapeHTML(value) {
 }
 
 
-/* =========================================
-   تشغيل
-========================================= */
+/* =========================================================
+   زر العودة للأعلى
+========================================================= */
 
-setupSearch();
+function setupTopButton() {
 
-loadMenu();
+    if (!topButton) {
+        return;
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        () => {
+
+            if (
+                window.scrollY > 400
+            ) {
+
+                topButton.classList.add(
+                    "show"
+                );
+
+            }
+
+            else {
+
+                topButton.classList.remove(
+                    "show"
+                );
+
+            }
+
+        }
+    );
+
+
+    topButton.addEventListener(
+        "click",
+        () => {
+
+            window.scrollTo({
+
+                top: 0,
+
+                behavior: "smooth"
+
+            });
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   تشغيل الموقع
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        setupSearch();
+
+        setupTopButton();
+
+        loadMenu();
+
+    }
+);

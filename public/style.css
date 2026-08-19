@@ -1,27 +1,37 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap');
 
-/* =========================================
+
+/* ==================================================
    QUAINT - PREMIUM MENU
-========================================= */
+================================================== */
 
 :root {
     --brown-dark: #2a1810;
     --brown: #3b2418;
     --brown-light: #5a3828;
+
     --cream: #f7f2ec;
     --cream-dark: #e9ddd2;
+
     --gold: #c69c6d;
     --gold-dark: #a87943;
+
     --text: #2d1b12;
     --muted: #7b6b62;
+
     --white: #ffffff;
+
     --green: #2e7d32;
     --red: #c62828;
 
     --shadow:
-        0 15px 45px rgba(45, 27, 18, 0.10);
+        0 15px 45px rgba(45, 27, 18, .10);
 }
+
+
+/* ==================================================
+   RESET
+================================================== */
 
 * {
     margin: 0;
@@ -47,9 +57,9 @@ input {
 }
 
 
-/* =========================================
+/* ==================================================
    HERO
-========================================= */
+================================================== */
 
 .hero {
     position: relative;
@@ -82,10 +92,11 @@ input {
             var(--brown-light)
         );
 
-    border-radius: 0 0 55px 55px;
+    border-radius:
+        0 0 55px 55px;
 
     box-shadow:
-        0 20px 55px rgba(42, 24, 16, .20);
+        0 20px 55px rgba(42,24,16,.20);
 }
 
 .hero::before,
@@ -96,7 +107,10 @@ input {
 
     border-radius: 50%;
 
-    border: 1px solid rgba(255,255,255,.08);
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    pointer-events: none;
 }
 
 .hero::before {
@@ -130,7 +144,7 @@ input {
 .hero-content {
     position: relative;
 
-    z-index: 2;
+    z-index: 5;
 
     padding: 30px 20px;
 }
@@ -138,7 +152,8 @@ input {
 .hero-logo {
     font-family: "Playfair Display", serif;
 
-    font-size: clamp(58px, 9vw, 105px);
+    font-size:
+        clamp(58px, 9vw, 105px);
 
     font-weight: 700;
 
@@ -147,14 +162,15 @@ input {
     color: #fff;
 
     text-shadow:
-        0 8px 25px rgba(0,0,0,.2);
+        0 8px 25px rgba(0,0,0,.20);
 }
 
 .hero-line {
     width: 75px;
     height: 3px;
 
-    margin: 18px auto 22px;
+    margin:
+        18px auto 22px;
 
     border-radius: 10px;
 
@@ -162,7 +178,8 @@ input {
 }
 
 .hero-content h1 {
-    font-size: clamp(22px, 4vw, 34px);
+    font-size:
+        clamp(22px, 4vw, 34px);
 
     font-weight: 600;
 
@@ -218,20 +235,49 @@ input {
 }
 
 
-/* =========================================
+/* ==================================================
    MAIN
-========================================= */
+================================================== */
 
 main {
-    width: min(1150px, calc(100% - 40px));
+    width:
+        min(
+            1150px,
+            calc(100% - 40px)
+        );
 
-    margin: 70px auto;
+    margin:
+        70px auto;
 }
 
 
-/* =========================================
+/* ==================================================
+   MAIN TITLE
+================================================== */
+
+main > h2 {
+    text-align: center;
+
+    width: 100%;
+
+    margin:
+        40px 0 30px;
+
+    color: var(--brown);
+
+    font-size:
+        clamp(27px, 4vw, 38px);
+
+    font-weight: 800;
+
+    /* التعديل: جعل العنوان في منتصف الصفحة */
+    display: block;
+}
+
+
+/* ==================================================
    INTRO
-========================================= */
+================================================== */
 
 .menu-intro {
     text-align: center;
@@ -258,7 +304,8 @@ main {
 .menu-topbar h2 {
     color: var(--brown);
 
-    font-size: clamp(27px, 4vw, 38px);
+    font-size:
+        clamp(27px, 4vw, 38px);
 
     font-weight: 800;
 }
@@ -266,7 +313,8 @@ main {
 .menu-intro p {
     max-width: 600px;
 
-    margin: 12px auto 0;
+    margin:
+        12px auto 0;
 
     color: var(--muted);
 
@@ -276,9 +324,9 @@ main {
 }
 
 
-/* =========================================
+/* ==================================================
    SECTION HEADING
-========================================= */
+================================================== */
 
 .section-heading {
     display: flex;
@@ -291,22 +339,9 @@ main {
 }
 
 
-/* =========================================
-   FEATURED SECTION
-========================================= */
-
-.featured-section {
-    margin-bottom: 65px;
-}
-
-#featuredMenu .products {
-    margin-bottom: 0;
-}
-
-
-/* =========================================
+/* ==================================================
    SEARCH
-========================================= */
+================================================== */
 
 .search-section {
     margin-bottom: 55px;
@@ -323,13 +358,15 @@ main {
 .search-box input {
     width: 100%;
 
-    border: 1px solid #e3d7cd;
+    border:
+        1px solid #e3d7cd;
 
     outline: none;
 
     background: #fff;
 
-    padding: 17px 55px 17px 50px;
+    padding:
+        17px 55px 17px 50px;
 
     border-radius: 18px;
 
@@ -354,9 +391,11 @@ main {
     position: absolute;
 
     right: 18px;
+
     top: 50%;
 
-    transform: translateY(-50%);
+    transform:
+        translateY(-50%);
 
     font-size: 20px;
 
@@ -367,9 +406,11 @@ main {
     position: absolute;
 
     left: 13px;
+
     top: 50%;
 
-    transform: translateY(-50%);
+    transform:
+        translateY(-50%);
 
     width: 32px;
     height: 32px;
@@ -390,9 +431,9 @@ main {
 }
 
 
-/* =========================================
+/* ==================================================
    CATEGORIES
-========================================= */
+================================================== */
 
 .categories-section {
     margin-bottom: 60px;
@@ -430,7 +471,8 @@ main {
 
     overflow: hidden;
 
-    border: 1px solid transparent;
+    border:
+        1px solid transparent;
 
     box-shadow: var(--shadow);
 
@@ -456,6 +498,8 @@ main {
 
     top: -95px;
     right: -70px;
+
+    pointer-events: none;
 }
 
 .category-card:hover {
@@ -475,7 +519,8 @@ main {
             var(--brown-light)
         );
 
-    border-color: var(--brown);
+    border-color:
+        var(--brown);
 }
 
 .category-icon {
@@ -522,9 +567,26 @@ main {
 }
 
 
-/* =========================================
+/* ==================================================
+   FEATURED
+================================================== */
+
+.featured-section {
+    margin-bottom: 65px;
+}
+
+#featuredMenu {
+    width: 100%;
+}
+
+#featuredMenu .products {
+    margin-bottom: 0;
+}
+
+
+/* ==================================================
    MENU TOP BAR
-========================================= */
+================================================== */
 
 .menu-section {
     scroll-margin-top: 25px;
@@ -533,7 +595,7 @@ main {
 .menu-topbar {
     display: flex;
 
-    align-items: end;
+    align-items: flex-end;
 
     justify-content: space-between;
 
@@ -545,7 +607,8 @@ main {
 
     background: #fff;
 
-    padding: 7px 15px;
+    padding:
+        7px 15px;
 
     border-radius: 20px;
 
@@ -556,9 +619,9 @@ main {
 }
 
 
-/* =========================================
-   PRODUCTS
-========================================= */
+/* ==================================================
+   PRODUCTS GRID
+================================================== */
 
 .products {
     display: grid;
@@ -566,22 +629,32 @@ main {
     grid-template-columns:
         repeat(3, 1fr);
 
-    gap: 24px;
+    gap: 26px;
+
+    width: 100%;
+}
+
+#featuredMenu .products,
+#menu .products {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 26px;
+
+    width: 100%;
 }
 
 
-/* =========================================
+/* ==================================================
    FLIP CARD
-========================================= */
+================================================== */
 
 .flip-card {
     width: 100%;
 
-    /*
-       الحجم الجديد
-       أصغر من السابق
-    */
-    height: 390px;
+    height: 410px;
 
     perspective: 1300px;
 
@@ -601,8 +674,10 @@ main {
         cubic-bezier(.4,.2,.2,1);
 }
 
-.flip-card.flipped .flip-card-inner {
-    transform: rotateY(180deg);
+.flip-card.flipped
+.flip-card-inner {
+    transform:
+        rotateY(180deg);
 }
 
 .flip-card-front,
@@ -625,9 +700,9 @@ main {
 }
 
 
-/* =========================================
+/* ==================================================
    FRONT
-========================================= */
+================================================== */
 
 .flip-card-front {
     background: #fff;
@@ -636,8 +711,7 @@ main {
 
     flex-direction: column;
 
-    transition:
-        .3s ease;
+    transition: .3s ease;
 }
 
 .flip-card:hover .flip-card-front {
@@ -646,19 +720,16 @@ main {
 }
 
 
-/* =========================================
-   IMAGE
-========================================= */
+/* ==================================================
+   PRODUCT IMAGE
+================================================== */
 
 .flip-card-front img {
     display: block;
 
     width: 100%;
 
-    /*
-       تصغير الصورة
-    */
-    height: 205px;
+    height: 215px;
 
     object-fit: cover;
 
@@ -667,19 +738,21 @@ main {
         filter .3s ease;
 }
 
-.flip-card:hover .flip-card-front img {
+.flip-card:hover
+.flip-card-front img {
     transform: scale(1.04);
 }
 
 
-/* =========================================
+/* ==================================================
    CARD CONTENT
-========================================= */
+================================================== */
 
 .card-content {
     flex: 1;
 
-    padding: 14px 18px 14px;
+    padding:
+        14px 18px;
 
     text-align: center;
 
@@ -728,7 +801,8 @@ main {
             var(--brown)
         );
 
-    padding: 7px 18px;
+    padding:
+        7px 18px;
 
     border-radius: 25px;
 
@@ -749,9 +823,9 @@ main {
 }
 
 
-/* =========================================
+/* ==================================================
    AVAILABILITY
-========================================= */
+================================================== */
 
 .availability {
     display: inline-flex;
@@ -760,7 +834,8 @@ main {
 
     justify-content: center;
 
-    padding: 4px 11px;
+    padding:
+        4px 11px;
 
     border-radius: 20px;
 
@@ -784,9 +859,9 @@ main {
 }
 
 
-/* =========================================
-   BACK
-========================================= */
+/* ==================================================
+   BACK CARD
+================================================== */
 
 .flip-card-back {
     background:
@@ -808,7 +883,8 @@ main {
 
     color: white;
 
-    transform: rotateY(180deg);
+    transform:
+        rotateY(180deg);
 
     display: flex;
 
@@ -818,11 +894,14 @@ main {
 
     text-align: center;
 
-    padding: 25px 20px;
+    padding:
+        25px 20px;
 }
 
 .flip-card-back h3 {
-    font-family: "Playfair Display", serif;
+    font-family:
+        "Playfair Display",
+        serif;
 
     font-size: 26px;
 
@@ -841,7 +920,8 @@ main {
 
     border-radius: 20px;
 
-    margin: 10px auto 15px;
+    margin:
+        10px auto 15px;
 }
 
 .flip-card-back h4 {
@@ -853,9 +933,9 @@ main {
 }
 
 
-/* =========================================
+/* ==================================================
    NOTES / INGREDIENTS
-========================================= */
+================================================== */
 
 .flip-card-back .notes,
 .flip-card-back .ingredients {
@@ -882,24 +962,28 @@ main {
 
     color: white;
 
-    padding: 5px 10px;
+    padding:
+        5px 10px;
 
     border-radius: 20px;
 
     font-size: 11px;
 
-    backdrop-filter: blur(5px);
+    backdrop-filter:
+        blur(5px);
 }
 
 
-/* =========================================
+/* ==================================================
    ROAST
-========================================= */
+================================================== */
 
 .flip-card-back p {
-    margin: 2px 0 13px;
+    margin:
+        2px 0 13px;
 
-    padding: 6px 15px;
+    padding:
+        6px 15px;
 
     border-radius: 25px;
 
@@ -917,9 +1001,9 @@ main {
 }
 
 
-/* =========================================
+/* ==================================================
    BACK PRICE
-========================================= */
+================================================== */
 
 .flip-card-back > strong {
     display: inline-flex;
@@ -932,7 +1016,8 @@ main {
 
     color: var(--brown);
 
-    padding: 8px 21px;
+    padding:
+        8px 21px;
 
     border-radius: 30px;
 
@@ -955,26 +1040,54 @@ main {
 }
 
 
-/* =========================================
+/* ==================================================
    FEATURED CARD
-========================================= */
+================================================== */
 
 .featured-card {
     position: relative;
 
-    /*
-       ظل خفيف فقط
-       بدون تكبير البطاقة
-    */
-    filter: drop-shadow(
-        0 10px 25px rgba(198,156,109,.12)
-    );
+    filter:
+        drop-shadow(
+            0 10px 25px rgba(198,156,109,.12)
+        );
+}
+
+.featured-card .flip-card-front {
+    border:
+        1px solid rgba(198,156,109,.28);
+}
+
+.featured-card .flip-card-front::after {
+    content: "";
+
+    position: absolute;
+
+    left: 14px;
+    right: 14px;
+
+    bottom: 0;
+
+    height: 3px;
+
+    border-radius:
+        10px 10px 0 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--gold),
+            transparent
+        );
+
+    opacity: .75;
 }
 
 
-/* =========================================
+/* ==================================================
    FEATURED BADGE
-========================================= */
+================================================== */
 
 .featured-badge {
     position: absolute;
@@ -999,7 +1112,8 @@ main {
 
     color: white;
 
-    padding: 6px 11px;
+    padding:
+        6px 11px;
 
     border-radius: 20px;
 
@@ -1015,14 +1129,16 @@ main {
     border:
         1px solid rgba(255,255,255,.25);
 
-    backdrop-filter: blur(5px);
+    backdrop-filter:
+        blur(5px);
 
     transition:
         transform .3s ease,
         box-shadow .3s ease;
 }
 
-.featured-card:hover .featured-badge {
+.featured-card:hover
+.featured-badge {
     transform:
         translateY(-2px)
         scale(1.03);
@@ -1032,72 +1148,42 @@ main {
 }
 
 
-/* =========================================
-   FEATURED CARD GOLD LINE
-========================================= */
-
-.featured-card .flip-card-front {
-    border:
-        1px solid rgba(198,156,109,.28);
-}
-
-.featured-card .flip-card-front::after {
-    content: "";
-
-    position: absolute;
-
-    left: 14px;
-    right: 14px;
-
-    bottom: 0;
-
-    height: 3px;
-
-    border-radius: 10px 10px 0 0;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            var(--gold),
-            transparent
-        );
-
-    opacity: .75;
-}
-
-
-/* =========================================
+/* ==================================================
    UNAVAILABLE
-========================================= */
-
-.unavailable-card .flip-card-front img {
-    filter: grayscale(55%);
-
-    opacity: .60;
-}
-
-.unavailable-card .card-content {
-    opacity: .82;
-}
-
-.unavailable-card .card-content strong {
-    background: #777;
-}
+================================================== */
 
 .unavailable-card {
     opacity: .92;
 }
 
+.unavailable-card
+.flip-card-front img {
+    filter:
+        grayscale(55%);
 
-/* =========================================
+    opacity: .60;
+}
+
+.unavailable-card
+.card-content {
+    opacity: .82;
+}
+
+.unavailable-card
+.card-content strong {
+    background: #777;
+}
+
+
+/* ==================================================
    EMPTY STATE
-========================================= */
+================================================== */
 
 .empty-state {
     text-align: center;
 
-    padding: 65px 20px;
+    padding:
+        65px 20px;
 
     background: white;
 
@@ -1127,9 +1213,139 @@ main {
 }
 
 
-/* =========================================
+/* ==================================================
+   ABOUT QUAINT
+================================================== */
+
+.about-quaint {
+    position: relative;
+
+    max-width: 850px;
+
+    margin:
+        80px auto 0;
+
+    padding:
+        65px 35px;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(198,156,109,.10),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #fff,
+            #f8f1eb
+        );
+
+    border-radius: 35px;
+
+    border:
+        1px solid rgba(198,156,109,.20);
+
+    box-shadow:
+        0 15px 45px rgba(45,27,18,.08);
+
+    overflow: hidden;
+}
+
+.about-quaint::before {
+    content: "QUAINT";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 130px;
+
+    font-weight: 700;
+
+    letter-spacing: 10px;
+
+    color:
+        rgba(59,36,24,.025);
+
+    pointer-events: none;
+}
+
+.about-quaint-content {
+    position: relative;
+
+    z-index: 2;
+}
+
+.about-quaint h2 {
+    color: var(--brown);
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(30px, 5vw, 42px);
+
+    margin-top: 4px;
+}
+
+.about-line {
+    width: 50px;
+    height: 3px;
+
+    margin:
+        15px auto 22px;
+
+    border-radius: 10px;
+
+    background: var(--gold);
+}
+
+.about-quaint p {
+    max-width: 650px;
+
+    margin:
+        0 auto 10px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+
+    line-height: 2;
+}
+
+.about-signature {
+    display: block;
+
+    margin-top: 25px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    letter-spacing: 5px;
+
+    color: var(--gold-dark);
+}
+
+
+/* ==================================================
    FOOTER
-========================================= */
+================================================== */
 
 .footer {
     text-align: center;
@@ -1143,15 +1359,19 @@ main {
 
     color: white;
 
-    padding: 55px 20px 35px;
+    padding:
+        55px 20px 35px;
 
     margin-top: 90px;
 
-    border-radius: 45px 45px 0 0;
+    border-radius:
+        45px 45px 0 0;
 }
 
 .footer-logo {
-    font-family: "Playfair Display", serif;
+    font-family:
+        "Playfair Display",
+        serif;
 
     font-size: 38px;
 
@@ -1170,12 +1390,12 @@ main {
 
 .footer-line {
     width: 50px;
-
     height: 2px;
 
     background: var(--gold);
 
-    margin: 20px auto;
+    margin:
+        20px auto;
 }
 
 .footer > span {
@@ -1185,9 +1405,9 @@ main {
 }
 
 
-/* =========================================
+/* ==================================================
    BACK TO TOP
-========================================= */
+================================================== */
 
 .top-button {
     position: fixed;
@@ -1217,7 +1437,8 @@ main {
 
     visibility: hidden;
 
-    transform: translateY(15px);
+    transform:
+        translateY(15px);
 
     transition: .3s;
 
@@ -1229,19 +1450,21 @@ main {
 
     visibility: visible;
 
-    transform: translateY(0);
+    transform:
+        translateY(0);
 }
 
 .top-button:hover {
     background: var(--brown-light);
 
-    transform: translateY(-3px);
+    transform:
+        translateY(-3px);
 }
 
 
-/* =========================================
+/* ==================================================
    TABLETS
-========================================= */
+================================================== */
 
 @media (max-width: 950px) {
 
@@ -1253,14 +1476,16 @@ main {
             );
     }
 
-    .products {
+    .products,
+    #featuredMenu .products,
+    #menu .products {
         grid-template-columns:
             repeat(2, 1fr);
     }
 
     .category-cards {
         grid-template-columns:
-            repeat(3, 1fr);
+            repeat(2, 1fr);
 
         gap: 15px;
     }
@@ -1268,20 +1493,12 @@ main {
     .category-card {
         min-height: 150px;
     }
-
-    .flip-card {
-        height: 385px;
-    }
-
-    .flip-card-front img {
-        height: 200px;
-    }
 }
 
 
-/* =========================================
+/* ==================================================
    MOBILE
-========================================= */
+================================================== */
 
 @media (max-width: 700px) {
 
@@ -1297,9 +1514,20 @@ main {
     }
 
     main {
-        width: calc(100% - 24px);
+        width:
+            calc(100% - 24px);
 
-        margin: 50px auto;
+        margin:
+            50px auto;
+    }
+
+    main > h2 {
+        font-size: 27px;
+
+        margin:
+            30px 0 25px;
+
+        text-align: center;
     }
 
     .menu-intro {
@@ -1322,18 +1550,20 @@ main {
         margin-bottom: 8px;
     }
 
-    .products {
+    .products,
+    #featuredMenu .products,
+    #menu .products {
         grid-template-columns: 1fr;
 
         gap: 20px;
     }
 
     .flip-card {
-        height: 390px;
+        height: 410px;
     }
 
     .flip-card-front img {
-        height: 205px;
+        height: 220px;
     }
 
     .menu-topbar {
@@ -1347,7 +1577,8 @@ main {
     .products-count {
         font-size: 10px;
 
-        padding: 6px 10px;
+        padding:
+            6px 10px;
     }
 
     .section-heading {
@@ -1363,9 +1594,35 @@ main {
         top: 10px;
         right: 10px;
 
-        padding: 5px 9px;
+        padding:
+            5px 9px;
 
         font-size: 9px;
+    }
+
+    .about-quaint {
+        margin-top: 60px;
+
+        padding:
+            45px 22px;
+
+        border-radius: 28px;
+    }
+
+    .about-quaint::before {
+        font-size: 75px;
+
+        letter-spacing: 5px;
+    }
+
+    .about-quaint p {
+        font-size: 13px;
+
+        line-height: 1.9;
+    }
+
+    .about-signature {
+        font-size: 18px;
     }
 
     .footer {
@@ -1377,9 +1634,9 @@ main {
 }
 
 
-/* =========================================
+/* ==================================================
    SMALL PHONES
-========================================= */
+================================================== */
 
 @media (max-width: 400px) {
 
@@ -1402,17 +1659,18 @@ main {
     }
 
     .hero-button {
-        padding: 11px 20px;
+        padding:
+            11px 20px;
 
         font-size: 13px;
     }
 
     .flip-card {
-        height: 375px;
+        height: 395px;
     }
 
     .flip-card-front img {
-        height: 195px;
+        height: 205px;
     }
 
     .card-content {
@@ -1424,7 +1682,8 @@ main {
     }
 
     .flip-card-back {
-        padding: 23px 16px;
+        padding:
+            23px 16px;
     }
 
     .flip-card-back h3 {
@@ -1444,374 +1703,5 @@ main {
 
         bottom: 15px;
         left: 15px;
-    }
-}
-
-/* =========================================
-   QUAINT - FINAL FIX
-   إصلاح تعارض التصميم القديم والجديد
-========================================= */
-
-/* =========================
-   HERO FIX
-========================= */
-
-.hero {
-    position: relative;
-
-    background:
-        radial-gradient(
-            circle at 20% 20%,
-            rgba(255,255,255,.08),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 80% 70%,
-            rgba(198,156,109,.12),
-            transparent 30%
-        ),
-        linear-gradient(
-            135deg,
-            #2a1810,
-            #3b2418,
-            #5a3828
-        ) !important;
-
-    color: white;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 5;
-}
-
-.hero-content h1,
-.hero-content p,
-.hero-content span {
-    position: relative;
-    z-index: 5;
-}
-
-
-/* =========================
-   MAIN FIX
-========================= */
-
-main {
-    width: min(1150px, calc(100% - 40px)) !important;
-    margin: 70px auto !important;
-}
-
-
-/* =========================
-   CATEGORIES FIX
-   إلغاء تعارض #categories القديم
-========================= */
-
-#categories {
-    display: grid !important;
-
-    grid-template-columns:
-        repeat(3, 1fr) !important;
-
-    gap: 22px !important;
-
-    justify-content: initial !important;
-
-    margin-bottom: 65px !important;
-}
-
-#categories .category-card {
-    width: 100% !important;
-    min-height: 175px !important;
-}
-
-
-/* =========================
-   FEATURED SECTION
-========================= */
-
-#featuredMenu {
-    width: 100% !important;
-}
-
-#featuredMenu .products {
-    display: grid !important;
-
-    grid-template-columns:
-        repeat(3, 1fr) !important;
-
-    gap: 26px !important;
-
-    width: 100% !important;
-}
-
-
-/* =========================
-   NORMAL PRODUCTS
-========================= */
-
-#menu .products {
-    display: grid !important;
-
-    grid-template-columns:
-        repeat(3, 1fr) !important;
-
-    gap: 26px !important;
-
-    width: 100% !important;
-}
-
-
-/* =========================
-   CARD SIZE
-========================= */
-
-.flip-card {
-    width: 100% !important;
-
-    height: 410px !important;
-}
-
-.flip-card-front img {
-    width: 100% !important;
-
-    height: 215px !important;
-
-    object-fit: cover !important;
-}
-
-
-/* =========================
-   FEATURED BADGE
-========================= */
-
-.featured-card {
-    position: relative !important;
-}
-
-.featured-badge {
-    position: absolute !important;
-
-    top: 12px !important;
-    right: 12px !important;
-
-    z-index: 20 !important;
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 950px) {
-
-    #featuredMenu .products,
-    #menu .products {
-        grid-template-columns:
-            repeat(2, 1fr) !important;
-    }
-
-    #categories {
-        grid-template-columns:
-            repeat(2, 1fr) !important;
-    }
-}
-
-
-@media (max-width: 700px) {
-
-    main {
-        width: calc(100% - 24px) !important;
-    }
-
-    #categories {
-        grid-template-columns: 1fr !important;
-
-        gap: 14px !important;
-    }
-
-    #categories .category-card {
-        min-height: 125px !important;
-    }
-
-    #featuredMenu .products,
-    #menu .products {
-        grid-template-columns: 1fr !important;
-
-        gap: 20px !important;
-    }
-
-    .flip-card {
-        height: 410px !important;
-    }
-
-    .flip-card-front img {
-        height: 220px !important;
-    }
-}
-
-
-/* =========================
-   SMALL PHONES
-========================= */
-
-@media (max-width: 400px) {
-
-    .flip-card {
-        height: 395px !important;
-    }
-
-    .flip-card-front img {
-        height: 205px !important;
-    }
-}
-
-/* =========================================
-   ABOUT QUAINT
-========================================= */
-
-.about-quaint {
-    position: relative;
-
-    max-width: 850px;
-
-    margin: 80px auto 0;
-
-    padding: 65px 35px;
-
-    text-align: center;
-
-    background:
-        radial-gradient(
-            circle at top right,
-            rgba(198,156,109,.10),
-            transparent 35%
-        ),
-        linear-gradient(
-            135deg,
-            #fff,
-            #f8f1eb
-        );
-
-    border-radius: 35px;
-
-    border: 1px solid rgba(198,156,109,.20);
-
-    box-shadow:
-        0 15px 45px rgba(45,27,18,.08);
-
-    overflow: hidden;
-}
-
-.about-quaint::before {
-    content: "QUAINT";
-
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    transform: translate(-50%, -50%);
-
-    font-family: "Playfair Display", serif;
-
-    font-size: 130px;
-
-    font-weight: 700;
-
-    letter-spacing: 10px;
-
-    color: rgba(59,36,24,.025);
-
-    pointer-events: none;
-}
-
-.about-quaint-content {
-    position: relative;
-
-    z-index: 2;
-}
-
-.about-quaint h2 {
-    color: var(--brown);
-
-    font-family: "Playfair Display", serif;
-
-    font-size: clamp(30px, 5vw, 42px);
-
-    margin-top: 4px;
-}
-
-.about-line {
-    width: 50px;
-
-    height: 3px;
-
-    margin: 15px auto 22px;
-
-    border-radius: 10px;
-
-    background: var(--gold);
-}
-
-.about-quaint p {
-    max-width: 650px;
-
-    margin: 0 auto 10px;
-
-    color: var(--muted);
-
-    font-size: 14px;
-
-    line-height: 2;
-
-}
-
-.about-signature {
-    display: block;
-
-    margin-top: 25px;
-
-    font-family: "Playfair Display", serif;
-
-    font-size: 20px;
-
-    font-weight: 700;
-
-    letter-spacing: 5px;
-
-    color: var(--gold-dark);
-}
-
-
-/* =========================================
-   ABOUT - MOBILE
-========================================= */
-
-@media (max-width: 700px) {
-
-    .about-quaint {
-        margin-top: 60px;
-
-        padding: 45px 22px;
-
-        border-radius: 28px;
-    }
-
-    .about-quaint::before {
-        font-size: 75px;
-
-        letter-spacing: 5px;
-    }
-
-    .about-quaint p {
-        font-size: 13px;
-
-        line-height: 1.9;
-    }
-
-    .about-signature {
-        font-size: 18px;
     }
 }

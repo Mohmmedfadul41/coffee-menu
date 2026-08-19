@@ -2,7 +2,6 @@
 <html lang="ar" dir="rtl">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -10,22 +9,38 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>QUAINT | Menu</title>
+    <title>QUAINT | قائمة المقهى</title>
+
+    <meta
+        name="description"
+        content="قائمة QUAINT للمشروبات والحلويات"
+    >
 
     <link
         rel="stylesheet"
         href="style.css"
     >
 
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
 </head>
+
 
 <body>
 
-    <!-- =========================
+
+    <!-- =========================================
          HERO
-    ========================= -->
+    ========================================== -->
 
     <header class="hero">
+
+        <div class="hero-overlay"></div>
+
 
         <div class="hero-content">
 
@@ -33,178 +48,398 @@
                 QUAINT
             </div>
 
+
+            <div class="hero-line"></div>
+
+
             <h1>
-                قهوة تُصنع بشغف ☕
+                قائمة QUAINT
             </h1>
 
+
             <p>
-                استمتع بتجربتك معنا
+                مذاق استثنائي في كل كوب
             </p>
+
+
+            <a
+                href="#menu"
+                class="hero-button"
+            >
+
+                <span>
+                    ☕
+                </span>
+
+                تصفح القائمة
+
+            </a>
 
         </div>
 
     </header>
 
 
+
+    <!-- =========================================
+         MAIN
+    ========================================== -->
+
     <main>
+
+
+        <!-- =====================================
+             MAIN TITLE
+        ====================================== -->
 
         <h2>
             قائمة QUAINT
         </h2>
 
 
-        <!-- =========================
-             FEATURED
-        ========================= -->
 
-        <section
-            id="featuredSection"
-            class="featured-section"
-            style="display: none;"
-        >
+        <!-- =====================================
+             INTRO
+        ====================================== -->
 
-            <div class="section-title">
+        <section class="menu-intro">
 
-                <span class="title-icon">
-                    ⭐
-                </span>
-
-                <div>
-
-                    <h2>
-                        اختيارات QUAINT
-                    </h2>
-
-                    <p>
-                        الأصناف المميزة لدينا
-                    </p>
-
-                </div>
-
-            </div>
+            <span class="section-label">
+                OUR MENU
+            </span>
 
 
-            <div
-                id="featuredMenu"
-                class="products featured-products"
-            ></div>
+            <h2>
+                اختر ما يناسب ذوقك
+            </h2>
+
+
+            <p>
+                اكتشف تشكيلتنا المختارة من القهوة والمشروبات
+                والحلويات، أُعدّت بعناية لتمنحك تجربة مميزة.
+            </p>
 
         </section>
 
 
-        <!-- =========================
+
+        <!-- =====================================
+             SEARCH
+        ====================================== -->
+
+        <section class="search-section">
+
+            <div class="search-box">
+
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="ابحث عن مشروب أو حلى..."
+                    autocomplete="off"
+                >
+
+
+                <span class="search-icon">
+                    🔍
+                </span>
+
+
+                <button
+                    type="button"
+                    id="clearSearch"
+                    aria-label="مسح البحث"
+                >
+                    ×
+                </button>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
              CATEGORIES
-        ========================= -->
+        ====================================== -->
 
-        <div
-            id="categories"
-            class="category-cards"
-        ></div>
-
-          <!-- =========================
-     SEARCH
-========================= -->
-
-<section class="search-section">
-
-    <div class="search-box">
-
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="ابحث عن قهوة، حلا، أو أي صنف..."
-            autocomplete="off"
+        <section
+            class="categories-section"
+            id="categoriesSection"
         >
 
-        <button
-            id="clearSearch"
-            type="button"
-            aria-label="مسح البحث"
+
+            <div class="section-heading">
+
+
+                <div>
+
+                    <span class="section-label">
+                        CATEGORIES
+                    </span>
+
+
+                    <h2>
+                        التصنيفات
+                    </h2>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!--
+                التصنيفات يتم إنشاؤها بواسطة JavaScript
+            -->
+
+            <div
+                class="category-cards"
+                id="categories"
+            >
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             FEATURED
+        ====================================== -->
+
+        <section
+            class="featured-section"
+            id="featuredSection"
         >
-            ×
-        </button>
-
-        <span class="search-icon">
-            🔍
-        </span>
-
-    </div>
-
-</section>
 
 
-<div id="menu"></div>
-        <!-- =========================
-             PRODUCTS
-        ========================= -->
-
-        <div id="menu"></div>
-
-            </main>
+            <div class="menu-topbar">
 
 
-    <!-- =========================
-         ABOUT QUAINT
-    ========================= -->
+                <div>
 
-    <section class="about-quaint" id="about">
-
-        <div class="about-quaint-content">
-
-            <span class="section-label">
-                OUR STORY
-            </span>
-
-            <h2>
-                عن QUAINT
-            </h2>
-
-            <div class="about-line"></div>
-
-            <p>
-                في QUAINT نؤمن أن التفاصيل الصغيرة تصنع الفرق.
-                نقدّم لكم تجربة تجمع بين القهوة المختارة،
-                الحلويات اللذيذة، والأجواء الهادئة في مكان واحد.
-            </p>
-
-            <p>
-                كل قطعة وكل كوب نختاره بعناية،
-                لنمنحكم لحظة تستحق أن تُستمتع بها.
-            </p>
-
-            <span class="about-signature">
-                QUAINT
-            </span>
-
-        </div>
-
-    </section>
+                    <span class="section-label">
+                        SPECIAL
+                    </span>
 
 
-    <!-- =========================
+                    <h2>
+                        المميز لدينا
+                    </h2>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!--
+                المنتجات المميزة يتم تحميلها بواسطة JavaScript
+            -->
+
+            <div
+                class="products"
+                id="featuredMenu"
+            >
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             MENU
+        ====================================== -->
+
+        <section
+            class="menu-section"
+            id="menu"
+        >
+
+
+            <div class="menu-topbar">
+
+
+                <div>
+
+                    <span class="section-label">
+                        MENU
+                    </span>
+
+
+                    <h2>
+                        قائمة QUAINT
+                    </h2>
+
+                </div>
+
+
+
+                <span
+                    class="products-count"
+                    id="productsCount"
+                >
+                    0 منتج
+                </span>
+
+
+            </div>
+
+
+
+            <!-- =================================
+                 PRODUCTS
+            ================================== -->
+
+            <div
+                class="products"
+                id="products"
+            >
+
+                <!--
+                    المنتجات يتم تحميلها بواسطة JavaScript
+                -->
+
+            </div>
+
+
+
+            <!-- =================================
+                 EMPTY STATE
+            ================================== -->
+
+            <div
+                class="empty-state"
+                id="emptyState"
+                style="display: none;"
+            >
+
+
+                <div class="empty-icon">
+                    🔍
+                </div>
+
+
+                <h3>
+                    لم نجد ما تبحث عنه
+                </h3>
+
+
+                <p>
+                    جرّب البحث باسم منتج آخر.
+                </p>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             ABOUT QUAINT
+        ====================================== -->
+
+        <section class="about-quaint">
+
+
+            <div class="about-quaint-content">
+
+
+                <span class="section-label">
+                    ABOUT US
+                </span>
+
+
+                <h2>
+                    عن QUAINT
+                </h2>
+
+
+                <div class="about-line"></div>
+
+
+                <p>
+                    في QUAINT نؤمن أن القهوة ليست مجرد مشروب،
+                    بل تجربة تبدأ من أول نظرة وتنتهي بآخر رشفة.
+                    لذلك نحرص على تقديم منتجات مختارة بعناية
+                    وبجودة تليق بكم.
+                </p>
+
+
+                <span class="about-signature">
+                    QUAINT
+                </span>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================================
          FOOTER
-    ========================= -->
+    ========================================== -->
 
     <footer class="footer">
+
 
         <div class="footer-logo">
             QUAINT
         </div>
 
+
         <p>
-            قهوة تُصنع بشغف ☕
+            Coffee • Dessert • Moments
         </p>
+
 
         <div class="footer-line"></div>
 
+
         <span>
-            © 2026 QUAINT. جميع الحقوق محفوظة.
+            © 2026 QUAINT — جميع الحقوق محفوظة
         </span>
+
 
     </footer>
 
 
+
+    <!-- =========================================
+         BACK TO TOP
+    ========================================== -->
+
+    <button
+        class="top-button"
+        id="topBtn"
+        type="button"
+        aria-label="العودة إلى الأعلى"
+    >
+        ↑
+    </button>
+
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
     <script src="script.js"></script>
+
 
 </body>
 
